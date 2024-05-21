@@ -4,24 +4,14 @@ import FacebookIcon from "../../images/Facebook icon.png";
 import AppleIcon from "../../images/Apple icon.png";
 import EmailIcon from "../../images/Email icon.png";
 
-export default function Register() {
+export default function Login() {
   return (
     <>
       <section className="main-container">
         <header className="header">SMART BIN ICON</header>
         <div className="registration-container">
-          <h1 className="title">ลงทะเบียน Smart Bin</h1>
+          <h1 className="title">ลงชื่อเข้าใช้ Smart Bin</h1>
           <form className="form">
-            <label className="label" htmlFor="username">
-              ชื่อผู้ใช้
-            </label>
-            <input
-              className="input"
-              type="text"
-              id="username"
-              placeholder="ชื่อผู้ใช้"
-              aria-label="ชื่อผู้ใช้"
-            />
             <label className="label" htmlFor="phone">
               หมายเลขโทรศัพท์
             </label>
@@ -42,19 +32,14 @@ export default function Register() {
               placeholder="รหัสผ่าน"
               aria-label="รหัสผ่าน"
             />
-            <label className="label" htmlFor="confirmPassword">
-              ยืนยันรหัสผ่าน
-            </label>
-            <input
-              className="input"
-              type="password"
-              id="confirmPassword"
-              placeholder="ยืนยันรหัสผ่าน"
-              aria-label="ยืนยันรหัสผ่าน"
-            />
-            <button className="register-button" type="submit">
-              ลงทะเบียน
+            <div className="remember-me">
+              <input type="checkbox" id="rememberMe" />
+              <label htmlFor="rememberMe" className="labelRemember">จดจำฉัน</label>
+            </div>
+            <button className="login-button" type="submit">
+              เข้าสู่ระบบ
             </button>
+            <p className="forgot-password">ลืมรหัสผ่าน</p>
           </form>
           <p className="alternative">หรือ</p>
           <div className="icons">
@@ -64,9 +49,9 @@ export default function Register() {
             <img src={EmailIcon} className="icon" alt="Email Icon" />
           </div>
           <div className="existing-account">
-            <span className="account-text">มีบัญชีผู้ใช้แล้วใช่ไหม?</span>
-            <a href='../Login' className="login-link">
-              เข้าสู่ระบบที่นี่
+            <span className="account-text">ยังไม่มีบัญชีผู้ใช้ใช่ไหม?</span>
+            <a href="../Register" className="login-link">
+              ลงทะเบียนใช้งาน
             </a>
           </div>
         </div>
@@ -135,7 +120,29 @@ export default function Register() {
           padding: 11px 12px;
           font: 400 15px Roboto, sans-serif;
         }
-        .register-button {
+        .forgot-password {
+          font-family: Roboto, sans-serif;
+          text-decoration: underline;
+          border-radius: 20px;
+          background-color: #fff;
+          align-self: center;
+          margin-top: 4px;
+          width: 199px;
+          max-width: 100%;
+          padding: 9px 60px;
+          text-align: center;
+        }
+        .remember-me {
+          display: flex;
+          margin-top: 9px;
+          gap: 6px;
+          white-space: nowrap;
+        }
+        .labelRemember {
+          font-family: Roboto, sans-serif;
+          font-weight: 600;
+        }
+        .login-button {
           border-radius: 20px;
           box-shadow: 0px 0.05px 2px 1px rgba(0, 0, 0, 0.25);
           background-color: #fff;
@@ -154,7 +161,7 @@ export default function Register() {
           z-index: 10;
           background-color: #fff;
           align-self: center;
-          margin-top: 20px;
+          margin-top: 0 px;
           color: #000;
           text-align: center;
           justify-content: center;
@@ -215,12 +222,16 @@ export default function Register() {
             padding: 8px 10px;
             font-size: 13px;
           }
-          .register-button {
+          .labelRemember{
+            font-size: 14px;
+            padding: 3px;
+          }
+          .login-button {
             width: 160px;
             padding: 10px 40px;
           }
           .alternative {
-            margin-top: 20px;
+            margin-top: 0px;
           }
           .icons {
             gap: 10px;
@@ -258,12 +269,16 @@ export default function Register() {
             padding: 6px 8px;
             font-size: 12px;
           }
-          .register-button {
+          .labelRemember{
+            font-size: 12px;
+            padding: 3px;
+          }
+          .login-button {
             width: 140px;
             padding: 8px 30px;
           }
           .alternative {
-            margin-top: 20px;
+            margin-top: 0px;
           }
           .icons {
             gap: 8px;
