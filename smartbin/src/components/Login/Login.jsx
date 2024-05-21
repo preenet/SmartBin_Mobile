@@ -39,7 +39,7 @@ export default function Login() {
             <button className="login-button" type="submit">
               เข้าสู่ระบบ
             </button>
-            <p className="forgot-password">ลืมรหัสผ่าน</p>
+            <a href='../forgot-password' className="forgot-password">ลืมรหัสผ่าน</a>
           </form>
           <p className="alternative">หรือ</p>
           <div className="icons">
