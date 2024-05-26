@@ -53,11 +53,11 @@ export default function Welcome() {
         .welcome {
           align-self: stretch;
           margin-top: 180px;
-          font: 20px Roboto, sans-serif;
+          font: 20px Mitr, sans-serif;
           text-align: center;
         }
         .button {
-          font-family: Roboto, sans-serif;
+          font-family: Mitr, sans-serif;
           border-radius: 20px;
           box-shadow: 0px 0.05px 2px 1px rgba(0, 0, 0, 0.25);
           background-color: #fff;

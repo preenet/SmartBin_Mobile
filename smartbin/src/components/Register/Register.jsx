@@ -97,7 +97,7 @@ export default function Register() {
           text-align: center;
           justify-content: center;
           padding: 12px 17px;
-          font: 700 16px Roboto, sans-serif;
+          font: 700 16px Mitr, sans-serif;
         }
         .registration-container {
           border-radius: 21px;
@@ -113,7 +113,7 @@ export default function Register() {
         }
         .title {
           color: #000;
-          font: 700 25px Roboto, sans-serif;
+          font: 700 25px Mitr, sans-serif;
         }
         .form {
           display: flex;
@@ -122,7 +122,7 @@ export default function Register() {
         .label {
           color: #000;
           margin-top: 16px;
-          font: 600 15px Roboto, sans-serif;
+          font: 600 15px Mitr, sans-serif;
         }
         .input {
           border-radius: 5px;
@@ -133,7 +133,7 @@ export default function Register() {
           color: rgba(0, 0, 0, 0.3);
           justify-content: center;
           padding: 11px 12px;
-          font: 400 15px Roboto, sans-serif;
+          font: 400 15px Mitr, sans-serif;
         }
         .register-button {
           border-radius: 20px;
@@ -148,7 +148,7 @@ export default function Register() {
           text-align: center;
           justify-content: center;
           padding: 12px 60px;
-          font: 400 15px Roboto, sans-serif;
+          font: 400 15px Mitr, sans-serif;
         }
         .alternative {
           z-index: 10;
@@ -159,7 +159,7 @@ export default function Register() {
           text-align: center;
           justify-content: center;
           padding: 0 21px;
-          font: 400 15px Roboto, sans-serif;
+          font: 400 15px Mitr, sans-serif;
         }
         .icons {
           align-self: center;
@@ -185,10 +185,10 @@ export default function Register() {
           margin: 20px 0 8px;
         }
         .account-text {
-          font-family: Roboto, sans-serif;
+          font-family: Mitr, sans-serif;
         }
         .login-link {
-          font-family: Roboto, sans-serif;
+          font-family: Mitr, sans-serif;
           text-decoration: underline;
           background-color: #fff;
         }

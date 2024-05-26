@@ -82,7 +82,7 @@ export default function Login() {
           text-align: center;
           justify-content: center;
           padding: 12px 17px;
-          font: 700 16px Roboto, sans-serif;
+          font: 700 16px Mitr, sans-serif;
         }
         .registration-container {
           border-radius: 21px;
@@ -98,7 +98,7 @@ export default function Login() {
         }
         .title {
           color: #000;
-          font: 700 25px Roboto, sans-serif;
+          font: 700 25px Mitr, sans-serif;
         }
         .form {
           display: flex;
@@ -107,7 +107,7 @@ export default function Login() {
         .label {
           color: #000;
           margin-top: 16px;
-          font: 600 15px Roboto, sans-serif;
+          font: 600 15px Mitr, sans-serif;
         }
         .input {
           border-radius: 5px;
@@ -118,10 +118,10 @@ export default function Login() {
           color: rgba(0, 0, 0, 0.3);
           justify-content: center;
           padding: 11px 12px;
-          font: 400 15px Roboto, sans-serif;
+          font: 400 15px Mitr, sans-serif;
         }
         .forgot-password {
-          font-family: Roboto, sans-serif;
+          font-family: Mitr, sans-serif;
           text-decoration: underline;
           border-radius: 20px;
           background-color: #fff;
@@ -139,7 +139,7 @@ export default function Login() {
           white-space: nowrap;
         }
         .labelRemember {
-          font-family: Roboto, sans-serif;
+          font-family: Mitr, sans-serif;
           font-weight: 600;
         }
         .login-button {
@@ -155,7 +155,7 @@ export default function Login() {
           text-align: center;
           justify-content: center;
           padding: 12px 60px;
-          font: 400 15px Roboto, sans-serif;
+          font: 400 15px Mitr, sans-serif;
         }
         .alternative {
           z-index: 10;
@@ -166,7 +166,7 @@ export default function Login() {
           text-align: center;
           justify-content: center;
           padding: 0 21px;
-          font: 400 15px Roboto, sans-serif;
+          font: 400 15px Mitr, sans-serif;
         }
         .icons {
           align-self: center;
@@ -192,10 +192,10 @@ export default function Login() {
           margin: 20px 0 8px;
         }
         .account-text {
-          font-family: Roboto, sans-serif;
+          font-family: Mitr, sans-serif;
         }
         .login-link {
-          font-family: Roboto, sans-serif;
+          font-family: Mitr, sans-serif;
           text-decoration: underline;
           background-color: #fff;
         }
