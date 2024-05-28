@@ -115,7 +115,7 @@ export default function Login() {
           background-color: #fff;
           margin-top: 6px;
           align-items: start;
-          color: rgba(0, 0, 0, 0.3);
+          color: #000;
           justify-content: center;
           padding: 11px 12px;
           font: 400 15px Mitr, sans-serif;

@@ -1,23 +1,5 @@
 import * as React from "react";
 
-const FormContainer = () => (
-  <form className="form-wrapper">
-    <label htmlFor="phoneNumberInput" className="sr-only">
-      หมายเลขโทรศัพท์
-    </label>
-    <input
-      className="phone-input"
-      type="tel"
-      id="phoneNumberInput"
-      placeholder="หมายเลขโทรศัพท์"
-      aria-label="หมายเลขโทรศัพท์"
-    />
-    <button className="submit-button" type="submit">
-      ยืนยัน
-    </button>
-  </form>
-);
-
 export default function Forgot() {
   return (
     <>
@@ -36,7 +18,19 @@ export default function Forgot() {
           <p className="description">
             ป้อนหมายเลขโทรศัพท์ของคุณ ที่ลงทะเบียนไว้กับ Smart Bin ที่นี่
           </p>
-          <FormContainer />
+          <label htmlFor="phoneNumberInput" className="sr-only">
+            หมายเลขโทรศัพท์
+          </label>
+          <input
+            className="phone-input"
+            type="tel"
+            id="phoneNumberInput"
+            placeholder="หมายเลขโทรศัพท์"
+            aria-label="หมายเลขโทรศัพท์"
+          />
+          <button className="submit-button" type="submit">
+            ยืนยัน
+          </button>
         </div>
       </section>
       <style jsx>{`
@@ -53,12 +47,13 @@ export default function Forgot() {
         .main-container {
           background-color: #fff;
           display: flex;
-          max-width: 480px;
-          width: 100%;
+          width: auto;
+          padding: 53px 17px;
           flex-direction: column;
-          color: #000;
-          justify-content: center;
           margin: 0 auto;
+          height: auto;
+          justify-content: center;
+          align-items: center;
         }
         .header {
           backdrop-filter: blur(50px);
@@ -74,18 +69,18 @@ export default function Forgot() {
           font: 700 16px Mitr, sans-serif;
         }
         .content {
-          border-radius: 21px;
+          border-radius: 20px;
           box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25),
             0px -1px 4px 0px rgba(0, 0, 0, 0.25);
           background-color: #fff;
           display: flex;
-          width: 100%;
+          width: auto;
           flex-direction: column;
           align-items: flex-start;
           font-size: 15px;
           font-weight: 400;
-          margin: 57px 0 -1px;
-          padding: 11px 27px 19px 12px;
+          margin: 0 auto;
+          padding: 53 17px;
         }
         .smart-bin-image {
           aspect-ratio: 1;
@@ -109,27 +104,32 @@ export default function Forgot() {
           margin: 15px 0 0 14px;
         }
         .phone-input {
-          font-family: Mitr, sans-serif;
-          border-radius: 5px;
+          border-radius: 10px;
           box-shadow: 0px 0.05px 2px 0px rgba(0, 0, 0, 0.25) inset;
           background-color: #fff;
-          width: 329px;
-          max-width: 100%;
-          color: rgba(0, 0, 0, 0.3);
-          margin-bottom: 15px;
-          padding: 11px 33px 11px 12px;
+          margin: 10px -3px 0 14px;
+          align-items: start;
+          color: #000;
+          justify-content: center;
+          padding: 11px 12px;
+          font: 400 15px Mitr, sans-serif;
         }
         .submit-button {
-          font-family: Mitr, sans-serif;
           border-radius: 20px;
-          box-shadow: 0px 0.05px 2px 1px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25), 0px -1px 1px rgba(0, 0, 0, 0.25);
           background-color: #fff;
           align-self: center;
+          margin-top: 15px;
           width: 199px;
           max-width: 100%;
+          align-items: center;
+          border-color: #fff;
+          color: #000;
           text-align: center;
-          margin: 27px 0 17px;
+          justify-content: center;
           padding: 12px 60px;
+          font: 400 15px Mitr, sans-serif;
+          margin: 20px 0 15px;
         }
       `}</style>
     </>
