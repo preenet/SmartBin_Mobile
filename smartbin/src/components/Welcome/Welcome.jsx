@@ -29,7 +29,7 @@ export default function Welcome() {
           --font-family: 'Mitr', sans-serif;
           --font-family-secondary: 'Roboto', sans-serif;
           --font-size-base: 18px;
-          --font-size-large: 20px;
+          --font-size-large: 18px;
           --font-size-small: 16px;
           --border-radius: 20px;
           --box-shadow: 0px 0.05px 2px 1px rgba(0, 0, 0, 0.25);
@@ -47,7 +47,7 @@ export default function Welcome() {
           justify-content: center;
           align-items: center;
           margin: 0 auto;
-          padding: 0 20px;
+          padding: 53 17px;
         }
 
         .content {
