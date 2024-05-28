@@ -71,7 +71,7 @@ export default function Forgot() {
         }
         .smart-bin-icon {
           margin-top: 30px;
-          font: 700 16px Roboto, sans-serif;
+          font: 700 16px Mitr, sans-serif;
         }
         .content {
           border-radius: 21px;
@@ -95,10 +95,10 @@ export default function Forgot() {
         }
         .title {
           margin: 20px 0 0 12px;
-          font: 700 20px Roboto, sans-serif;
+          font: 700 20px Mitr, sans-serif;
         }
         .description {
-          font-family: Roboto, sans-serif;
+          font-family: Mitr, sans-serif;
           padding-right: 54px;
           margin: 0 -3px 0 14px;
         }
@@ -109,7 +109,7 @@ export default function Forgot() {
           margin: 15px 0 0 14px;
         }
         .phone-input {
-          font-family: Roboto, sans-serif;
+          font-family: Mitr, sans-serif;
           border-radius: 5px;
           box-shadow: 0px 0.05px 2px 0px rgba(0, 0, 0, 0.25) inset;
           background-color: #fff;
@@ -120,7 +120,7 @@ export default function Forgot() {
           padding: 11px 33px 11px 12px;
         }
         .submit-button {
-          font-family: Roboto, sans-serif;
+          font-family: Mitr, sans-serif;
           border-radius: 20px;
           box-shadow: 0px 0.05px 2px 1px rgba(0, 0, 0, 0.25);
           background-color: #fff;

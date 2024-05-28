@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useNavigate } from 'react-router-dom';
 
 export default function Welcome() {
@@ -23,19 +23,33 @@ export default function Welcome() {
         </section>
       </main>
       <style jsx>{`
+        :root {
+          --primary-color: #fff;
+          --secondary-color: #000;
+          --font-family: 'Mitr', sans-serif;
+          --font-family-secondary: 'Roboto', sans-serif;
+          --font-size-base: 18px;
+          --font-size-large: 20px;
+          --font-size-small: 16px;
+          --border-radius: 20px;
+          --box-shadow: 0px 0.05px 2px 1px rgba(0, 0, 0, 0.25);
+        }
+
         .container {
-          background-color: #fff;
+          background-color: var(--primary-color);
           display: flex;
-          max-width: 480px;
+          max-width: 100%;
           width: 100%;
           flex-direction: column;
-          font-size: 18px;
-          color: #000;
+          font-size: var(--font-size-base);
+          color: var(--secondary-color);
           font-weight: 700;
           justify-content: center;
           align-items: center;
           margin: 0 auto;
+          padding: 0 20px;
         }
+
         .content {
           backdrop-filter: blur(50px);
           background-color: rgba(255, 255, 255, 0.7);
@@ -43,24 +57,30 @@ export default function Welcome() {
           width: 100%;
           flex-direction: column;
           align-items: center;
-          padding: 80px;
+          padding: 40px;
+          box-sizing: border-box;
         }
+
         .icon {
           text-align: center;
-          margin-top: 122px;
-          font: 16px Roboto, sans-serif;
+          margin-top: 60px;
+          font-family: var(--font-family-secondary);
+          font-size: var(--font-size-small);
         }
+
         .welcome {
           align-self: stretch;
-          margin-top: 180px;
-          font: 20px Mitr, sans-serif;
+          margin-top: 90px;
+          font-family: var(--font-family);
+          font-size: var(--font-size-large);
           text-align: center;
         }
+
         .button {
-          font-family: Mitr, sans-serif;
-          border-radius: 20px;
-          box-shadow: 0px 0.05px 2px 1px rgba(0, 0, 0, 0.25);
-          background-color: #fff;
+          font-family: var(--font-family);
+          border-radius: var(--border-radius);
+          box-shadow: var(--box-shadow);
+          background-color: var(--primary-color);
           width: 199px;
           max-width: 100%;
           align-items: center;
@@ -70,49 +90,35 @@ export default function Welcome() {
           justify-content: center;
           padding: 11px 60px;
           margin-top: 24px;
+          cursor: pointer;
+          border: none;
+          transition: background-color 0.3s, transform 0.3s;
         }
+
+        .button:hover, .button:focus {
+          background-color: rgba(255, 255, 255, 0.9);
+          transform: scale(1.05);
+        }
+
         .register {
-          margin-top: 109px;
+          margin-top: 60px;
         }
+
         .login {
-          margin: 24px 0 83px;
+          margin: 20px 0 40px;
         }
-        @media only screen and (max-width: 390px) {
+
+        @media (min-width: 390px) {
           .content {
-            padding: 40px;
-          }
-          .icon {
-            margin-top: 60px;
-            font-size: 14px;
-          }
-          .welcome {
-            margin-top: 90px;
-            font-size: 18px;
-          }
-          .button {
-            padding: 10px 50px;
-          }
-          .register {
-            margin-top: 60px;
-          }
-          .login {
-            margin: 20px 0 40px;
-          }
-        }
-        @media only screen and (min-width: 768px) and (max-width: 1024px) {
-          .container {
-            max-width: 700px;
-          }
-          .content {
-            padding: 60px;
+            padding: 80px;
           }
           .icon {
             margin-top: 100px;
-            font-size: 16px;
+            font-size: var(--font-size-small);
           }
           .welcome {
             margin-top: 150px;
-            font-size: 20px;
+            font-size: var(--font-size-large);
           }
           .button {
             padding: 11px 55px;
@@ -124,29 +130,16 @@ export default function Welcome() {
             margin: 24px 0 100px;
           }
         }
-        @media only screen and (min-width: 1440px) {
+
+        @media (min-width: 768px) {
+          .container {
+            max-width: 700px;
+          }
+        }
+
+        @media (min-width: 1024px) {
           .container {
             max-width: 1200px;
-          }
-          .content {
-            padding: 100px;
-          }
-          .icon {
-            margin-top: 150px;
-            font-size: 18px;
-          }
-          .welcome {
-            margin-top: 200px;
-            font-size: 22px;
-          }
-          .button {
-            padding: 15px 70px;
-          }
-          .register {
-            margin-top: 100px;
-          }
-          .login {
-            margin: 30px 0 150px;
           }
         }
       `}</style>
