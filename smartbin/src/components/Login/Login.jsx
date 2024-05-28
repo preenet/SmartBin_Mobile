@@ -60,17 +60,16 @@ export default function Login() {
         .main-container {
           background-color: #fff;
           display: flex;
-          max-width: 480px;
-          width: 100%;
-          padding: 20px 10px;
+          width: auto;
+          padding: 53px 17px;
           flex-direction: column;
           margin: 0 auto;
-          height: 100vh;
+          height: auto;
           justify-content: center;
           align-items: center;
         }
         .header {
-          border-radius: 21px;
+          border-radius: 20px;
           box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25),
             0px -1px 4px 0px rgba(0, 0, 0, 0.25);
           background-color: #fff;
@@ -85,7 +84,7 @@ export default function Login() {
           font: 700 16px Mitr, sans-serif;
         }
         .registration-container {
-          border-radius: 21px;
+          border-radius: 20px;
           box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25),
             0px -1px 4px 0px rgba(0, 0, 0, 0.25);
           background-color: #fff;
@@ -94,11 +93,12 @@ export default function Login() {
           max-width: 480px;
           width: 100%;
           flex-direction: column;
-          padding: 20px 15px;
+          padding: 10px 17px;
         }
         .title {
           color: #000;
           font: 700 25px Mitr, sans-serif;
+          margin-bottom: 0px;
         }
         .form {
           display: flex;
@@ -106,11 +106,11 @@ export default function Login() {
         }
         .label {
           color: #000;
-          margin-top: 16px;
+          margin-top: 10px;
           font: 600 15px Mitr, sans-serif;
         }
         .input {
-          border-radius: 5px;
+          border-radius: 10px;
           box-shadow: 0px 0.05px 2px 0px rgba(0, 0, 0, 0.25) inset;
           background-color: #fff;
           margin-top: 6px;
@@ -140,17 +140,18 @@ export default function Login() {
         }
         .labelRemember {
           font-family: Mitr, sans-serif;
-          font-weight: 600;
+          font-weight: 400;
         }
         .login-button {
           border-radius: 20px;
-          box-shadow: 0px 0.05px 2px 1px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25), 0px -1px 1px rgba(0, 0, 0, 0.25);
           background-color: #fff;
           align-self: center;
-          margin-top: 25px;
+          margin-top: 15px;
           width: 199px;
           max-width: 100%;
           align-items: center;
+          border-color: #fff;
           color: #000;
           text-align: center;
           justify-content: center;
@@ -198,98 +199,6 @@ export default function Login() {
           font-family: Mitr, sans-serif;
           text-decoration: underline;
           background-color: #fff;
-        }
-        @media (max-width: 768px) {
-          .main-container {
-            padding: 20px 10px;
-          }
-          .header {
-            margin-top: 10px;
-            width: 90px;
-            font-size: 14px;
-          }
-          .registration-container {
-            margin-top: 20px;
-            padding: 20px 15px;
-          }
-          .title {
-            font-size: 20px;
-          }
-          .label {
-            font-size: 13px;
-          }
-          .input {
-            padding: 8px 10px;
-            font-size: 13px;
-          }
-          .labelRemember{
-            font-size: 14px;
-            padding: 3px;
-          }
-          .login-button {
-            width: 160px;
-            padding: 10px 40px;
-          }
-          .alternative {
-            margin-top: 0px;
-          }
-          .icons {
-            gap: 10px;
-            max-width: 250px;
-          }
-          .icon {
-            width: 50px;
-          }
-          .existing-account {
-            margin: 20px 0 8px;
-          }
-        }
-        @media (max-width: 390px) {
-          .main-container {
-            width: 350px;
-            padding: 20px 5px;
-          }
-          .header {
-            margin-top: 5px;
-            width: 70px;
-            font-size: 12px;
-          }
-          .registration-container {
-            width: 350px;
-            margin-top: 20px;
-            padding: 20px 10px;
-          }
-          .title {
-            font-size: 18px;
-          }
-          .label {
-            font-size: 12px;
-          }
-          .input {
-            padding: 6px 8px;
-            font-size: 12px;
-          }
-          .labelRemember{
-            font-size: 12px;
-            padding: 3px;
-          }
-          .login-button {
-            width: 140px;
-            padding: 8px 30px;
-          }
-          .alternative {
-            margin-top: 0px;
-          }
-          .icons {
-            gap: 8px;
-            max-width: 200px;
-          }
-          .icon {
-            width: 45px;
-          }
-          .existing-account {
-            margin: 20px 0 8px;
-          }
         }
       `}</style>
     </>
