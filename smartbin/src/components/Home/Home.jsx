@@ -1,7 +1,7 @@
 import * as React from "react";
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
 import Modal from 'react-modal';
+import useLoadScript from "../../hooks/useLoadScript";
+import GoogleMap from "../GoogleMap";
 
 Modal.setAppElement('#root');
 
@@ -31,9 +31,34 @@ function Transaction({placeName, date, points}) {
 
 export default function Home() {
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
+  const [userLocation, setUserLocation] = React.useState({ lat: 0, lng: 0 });
+  const [locationLoaded, setLocationLoaded] = React.useState(false);
 
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
+
+  const scriptLoaded = useLoadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyDYt61BGbbbXwJ2ENe8WK4Glj3qMq1-_SY");
+  //useLoadScript("https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY");
+
+  React.useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+          setLocationLoaded(true);
+        },
+        () => {
+          // Handle error
+          setLocationLoaded(true); // Still set it to true to attempt loading the map with default center
+        }
+      );
+    } else {
+      setLocationLoaded(true); // Browser doesn't support Geolocation
+    }
+  }, []);
 
   return (
     <>
@@ -225,16 +250,13 @@ export default function Home() {
           </section>
         </section>
         <div className="search-nearby-button" onClick={openModal}>
-          <MapContainer center={[18.800525355582607, 98.9503902346]} zoom={17} className="small-map">
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          {scriptLoaded && locationLoaded && (
+            <GoogleMap
+              className="small-map"
+              center={userLocation}
+              zoom={17}
             />
-            <Marker position={[18.800525355582607, 98.9503902346]}>
-              <Popup>
-                Smart Bin Location
-              </Popup>
-            </Marker>
-          </MapContainer>
+          )}
         </div>
         <div className="action-buttons">
           <button className="action-button">สแกนขยะ</button>
@@ -265,16 +287,13 @@ export default function Home() {
         }}
       >
         <button onClick={closeModal}>Close</button>
-        <MapContainer center={[18.800525355582607, 98.9503902346]} zoom={17} className="modal-map">
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        {scriptLoaded && locationLoaded && (
+          <GoogleMap
+            className="modal-map"
+            center={userLocation}
+            zoom={17}
           />
-          <Marker position={[18.800525355582607, 98.9503902346]}>
-            <Popup>
-              Smart Bin Location
-            </Popup>
-          </Marker>
-        </MapContainer>
+        )}
       </Modal>
     </>
   );
