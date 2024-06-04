@@ -31,7 +31,7 @@ function Transaction({placeName, date, points}) {
 
 export default function Home() {
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
-  const [userLocation, setUserLocation] = React.useState({ lat: 0, lng: 0 });
+  const [userLocation, setUserLocation] = React.useState({ lat: 18.80084905662726, lng:  98.950352098965380 });
   const [locationLoaded, setLocationLoaded] = React.useState(false);
 
   const openModal = () => setModalIsOpen(true);
