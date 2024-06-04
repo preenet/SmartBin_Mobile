@@ -21,11 +21,7 @@ jobs:
               with:
                   username: ${{ secrets.DOCKER_HUB_USERNAME }}
                   password: ${{ secrets.DOCKER_HUB_TOKEN }}
-                  
-            - name: Change dir
-              with:
-                script: cd ./smartbin
-            
+                              
             - name: Build and push
               uses: docker/build-push-action@v4
               with:
