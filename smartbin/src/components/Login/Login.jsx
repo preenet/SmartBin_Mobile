@@ -4,8 +4,8 @@ import FacebookIcon from "../../images/Facebook icon.png";
 import AppleIcon from "../../images/Apple icon.png";
 import EmailIcon from "../../images/Email icon.png";
 import { loginUser } from '../../services/api';
-import axios from "axios";
 import useToken from "../../hooks/useToken";
+import * as Yup from "yup";
 
 const API_URL = 'http://127.0.0.1:5000';
 
@@ -15,6 +15,16 @@ export default function Login() {
   const [formData, setFormData] = useState({
     phonenumber: '',
     password: ''
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const validationSchema = Yup.object({
+    phonenumber: Yup.string()
+      .matches(/^\d{10}$/, "Phone Number must be 10 digits")
+      .required("กรุณาใส่เบอร์โทรศัพท์"),
+    password: Yup.string()
+      .required("กรุณาใส่รหัสผ่าน")
   });
 
   const handleChange = (e) => {
@@ -33,14 +43,20 @@ export default function Login() {
             phonenumber: formData.phone,
             password: formData.password
         });
+        await validationSchema.validate(response, {abortEarly: false});
         if (response.status === 200) {
           alert('Login successful');
         }
         console.log(response);
         // Handle successful login, such as saving tokens, redirecting, etc.
     } catch (error) {
-        console.error("There was an error logging in!", error);
-        alert('Login failed');
+        const newErrors = {};
+
+        error.inner.forEach((err) => {
+          newErrors[err.path] = err.message;
+        });
+
+        setErrors(newErrors);
     }
   };
 
@@ -63,6 +79,7 @@ export default function Login() {
               value={formData.phone}
               onChange={handleChange}
             />
+            {errors.phonenumber && <div className="error">{errors.phonenumber}</div>}
             <label className="label" htmlFor="password">
               รหัสผ่าน
             </label>
@@ -75,6 +92,7 @@ export default function Login() {
               value={formData.password}
               onChange={handleChange}
             />
+            {errors.password && <div className="error">{errors.password}</div>}
             <div className="remember-me">
               <input type="checkbox" id="rememberMe" />
               <label htmlFor="rememberMe" className="labelRemember">จดจำฉัน</label>
@@ -242,6 +260,10 @@ export default function Login() {
           font-family: Mitr, sans-serif;
           text-decoration: underline;
           background-color: #fff;
+        }
+        .error {
+          font: 15px Mitr, sans-serif;
+          color: red;
         }
       `}</style>
     </>

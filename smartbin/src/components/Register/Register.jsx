@@ -4,6 +4,7 @@ import FacebookIcon from "../../images/Facebook icon.png";
 import AppleIcon from "../../images/Apple icon.png";
 import EmailIcon from "../../images/Email icon.png";
 import { registerUser } from '../../services/api';
+import * as Yup from "yup";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -11,6 +12,27 @@ export default function Register() {
     phone: '',
     password: '',
     confirmPassword: ''
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const validationSchema = Yup.object({
+    phonenumber: Yup.string()
+      .matches(/^\d{10}$/, "Phone Number must be 10 digits")
+      .required("กรุณาใส่เบอร์โทรศัพท์"),
+    password: Yup.string()
+      .required("กรุณาใส่รหัสผ่าน")
+      .min(8, "รหัสผ่านควรมีอย่างน้อง 8 ตัวอักษร")
+      .matches(
+        /[!@#$%^&*(),.?":{}|<>]/,
+        "รหัสผ่านควรมีอักขระพิเศษอย่างน้อยหนึ่งตัว"
+      )
+      .matches(/[0-9]/, "รหัสผ่านควรมีตัวเลขอย่างน้องหนึ่งตัว")
+      .matches(/[A-Z]/, "รหัสผ่านควรมีตัวอักษรพิมพ์ใหญ่อย่างน้องหนึ่งตัว")
+      .matches(/[a-z]/, "รหัสผ่านควรมีตัวอักษรพิมพ์เล็กอย่างน้องหนึ่งตัว"),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref("password")], "รหัสผ่านไม่ตรงกัน")
+      .required("กรุณาใส่ยินยันรหัสผ่าน"),
   });
 
   const handleChange = (e) => {
@@ -237,6 +259,10 @@ export default function Register() {
           font-family: Mitr, sans-serif;
           text-decoration: underline;
           background-color: #fff;
+        }
+        .error {
+          font: 15px Mitr, sans-serif;
+          color: red;
         }
       `}</style>
     </>
