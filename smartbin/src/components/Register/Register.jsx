@@ -1,17 +1,54 @@
-import * as React from "react";
+import React, { useState } from "react";
 import GoogleIcon from "../../images/Google icon.png";
 import FacebookIcon from "../../images/Facebook icon.png";
 import AppleIcon from "../../images/Apple icon.png";
 import EmailIcon from "../../images/Email icon.png";
+import { registerUser } from '../../services/api';
 
 export default function Register() {
+  const [formData, setFormData] = useState({
+    username: '',
+    phone: '',
+    password: '',
+    confirmPassword: ''
+  });
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({
+      ...formData,
+      [id]: value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+    }
+
+    try {
+        const response = await registerUser({
+            username: formData.username,
+            phoneNumber: formData.phone,
+            password: formData.password
+        });
+        alert('Registration successful');
+        console.log(response);
+    } catch (error) {
+        console.error("There was an error registering!", error);
+        alert('Registration failed');
+    }
+};
+
   return (
     <>
       <section className="main-container">
         <header className="header">SMART BIN ICON</header>
         <div className="registration-container">
           <h1 className="title">ลงทะเบียน Smart Bin</h1>
-          <form className="form">
+          <form className="form" onSubmit={handleSubmit}>
             <label className="label" htmlFor="username">
               ชื่อผู้ใช้
             </label>
@@ -21,6 +58,8 @@ export default function Register() {
               id="username"
               placeholder="ชื่อผู้ใช้"
               aria-label="ชื่อผู้ใช้"
+              value={formData.username}
+              onChange={handleChange}
             />
             <label className="label" htmlFor="phone">
               หมายเลขโทรศัพท์
@@ -31,6 +70,8 @@ export default function Register() {
               id="phone"
               placeholder="เลขโทรศัพท์"
               aria-label="หมายเลขโทรศัพท์"
+              value={formData.phone}
+              onChange={handleChange}
             />
             <label className="label" htmlFor="password">
               รหัสผ่าน
@@ -41,6 +82,8 @@ export default function Register() {
               id="password"
               placeholder="รหัสผ่าน"
               aria-label="รหัสผ่าน"
+              value={formData.password}
+              onChange={handleChange}
             />
             <label className="label" htmlFor="confirmPassword">
               ยืนยันรหัสผ่าน
@@ -51,6 +94,8 @@ export default function Register() {
               id="confirmPassword"
               placeholder="ยืนยันรหัสผ่าน"
               aria-label="ยืนยันรหัสผ่าน"
+              value={formData.confirmPassword}
+              onChange={handleChange}
             />
             <button className="register-button" type="submit">
               ลงทะเบียน

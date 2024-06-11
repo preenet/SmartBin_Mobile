@@ -1,17 +1,56 @@
-import * as React from "react";
+import React, { useState } from "react";
 import GoogleIcon from "../../images/Google icon.png";
 import FacebookIcon from "../../images/Facebook icon.png";
 import AppleIcon from "../../images/Apple icon.png";
 import EmailIcon from "../../images/Email icon.png";
+import { loginUser } from '../../services/api';
+import axios from "axios";
+import useToken from "../../hooks/useToken";
+
+const API_URL = 'http://127.0.0.1:5000';
 
 export default function Login() {
+  const { setToken, role } = useToken();
+
+  const [formData, setFormData] = useState({
+    phonenumber: '',
+    password: ''
+  });
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({
+      ...formData,
+      [id]: value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+        const response = await loginUser({
+            phonenumber: formData.phone,
+            password: formData.password
+        });
+        if (response.status === 200) {
+          alert('Login successful');
+        }
+        console.log(response);
+        // Handle successful login, such as saving tokens, redirecting, etc.
+    } catch (error) {
+        console.error("There was an error logging in!", error);
+        alert('Login failed');
+    }
+  };
+
   return (
     <>
       <section className="main-container">
         <header className="header">SMART BIN ICON</header>
         <div className="registration-container">
           <h1 className="title">ลงชื่อเข้าใช้ Smart Bin</h1>
-          <form className="form">
+          <form className="form" onSubmit={handleSubmit}>
             <label className="label" htmlFor="phone">
               หมายเลขโทรศัพท์
             </label>
@@ -21,6 +60,8 @@ export default function Login() {
               id="phone"
               placeholder="เลขโทรศัพท์"
               aria-label="หมายเลขโทรศัพท์"
+              value={formData.phone}
+              onChange={handleChange}
             />
             <label className="label" htmlFor="password">
               รหัสผ่าน
@@ -31,6 +72,8 @@ export default function Login() {
               id="password"
               placeholder="รหัสผ่าน"
               aria-label="รหัสผ่าน"
+              value={formData.password}
+              onChange={handleChange}
             />
             <div className="remember-me">
               <input type="checkbox" id="rememberMe" />

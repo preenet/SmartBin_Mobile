@@ -1,38 +1,21 @@
 import * as React from "react";
 import Modal from 'react-modal';
 import useLoadScript from "../../hooks/useLoadScript";
+import UserCard from './UserCard';
+import Transaction from './Transaction';
 import GoogleMap from "../GoogleMap";
+import { getActivitiesData } from '../../services/api';
+import { getUsername } from '../../services/api';
 
 Modal.setAppElement('#root');
-
-function UserCard({ title, units, value }) {
-  return (
-    <div className="points-card">
-      <p className="points-card-title">{title}</p>
-      <p className="points-card-value">{value}</p>
-      <p className="points-card-units">{units}</p>
-    </div>
-  );
-}
-
-function Transaction({placeName, date, points}) {
-  return (
-    <div className="transaction">
-      <div className="transaction-details">
-        <p className="transaction-place-name">{placeName}</p>
-        <p className="transaction-date">{date}</p>
-      </div>
-      <p className="transaction-points" tabIndex="0">
-          <span className="points-highlight">+{points}</span> คะแนน
-      </p>
-    </div>
-  );
-}
 
 export default function Home() {
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const [userLocation, setUserLocation] = React.useState({ lat: 18.80084905662726, lng:  98.950352098965380 });
   const [locationLoaded, setLocationLoaded] = React.useState(false);
+  const [activities, setActivities] = React.useState({ points: 0, carbon: 0, recycle: 0 });
+  const [transactions, setTransactions] = React.useState([]);
+  const [username, setUsername] = React.useState("");
 
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
@@ -58,7 +41,31 @@ export default function Home() {
     } else {
       setLocationLoaded(true); // Browser doesn't support Geolocation
     }
+
+    const fetchData = async () => {
+      try {
+        const response = await getActivitiesData();
+        setActivities(response.activitiesData); // Assuming response contains activitiesData
+        setTransactions(response.transactions); // Assuming response contains transactions
+      } catch (error) {
+        console.error("Error fetching activity data:", error);
+      }
+    };
+
+    fetchData();
+
+    async function fetchUserData() {
+      try {
+        const userData = await getUsername();
+        setUsername(userData.username);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    }
+
+    fetchUserData();
   }, []);
+  
 
   return (
     <>
@@ -240,13 +247,18 @@ export default function Home() {
       <section className="container">
         <section className="container-2">
           <div className="user-greeting-container">
-            <p className="user-greeting">สวัสดีคุณ Username</p>
+            <p className="user-greeting">สวัสดีคุณ {username}</p>
             <p className="view-all">ดูทั้งหมด</p>
           </div>
-          <section className="points-section">
+          {/* <section className="points-section">
             <UserCard title="คุณมีแต้มทั้งหมด" units="คะแนน" value="120" />
             <UserCard title="ลดคาร์บอนได้ทั้งหมด" units="ตัน" value="0.009" />
             <UserCard title="รีไซเคิลไปทั้งหมด" units="กรัม" value="120" />
+          </section> */}
+          <section className="points-section">
+            <UserCard title="คุณมีแต้มทั้งหมด" units="คะแนน" value={activities.points} />
+            <UserCard title="ลดคาร์บอนได้ทั้งหมด" units="ตัน" value={activities.carbon} />
+            <UserCard title="รีไซเคิลไปทั้งหมด" units="กรัม" value={activities.recycle} />
           </section>
         </section>
         <div className="search-nearby-button" onClick={openModal}>
@@ -269,6 +281,14 @@ export default function Home() {
           </div>
           <Transaction placeName="ชื่อสถานที่" date="02/05/2024 - 13:00 น." points="60" />
           <Transaction placeName="ชื่อสถานที่" date="01/05/2024 - 12:00 น." points="60" />
+          {/* {transactions.map(transaction => (
+            <Transaction
+              key={transaction.activityID}
+              location={transaction.location}
+              timestamp={transaction.timestamp}
+              point={transaction.point}
+            />
+          ))} */}
         </section>
       </section>
       <Modal
