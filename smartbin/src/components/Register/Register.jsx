@@ -3,13 +3,16 @@ import GoogleIcon from "../../images/Google icon.png";
 import FacebookIcon from "../../images/Facebook icon.png";
 import AppleIcon from "../../images/Apple icon.png";
 import EmailIcon from "../../images/Email icon.png";
-import { registerUser } from '../../services/api';
+import {registerUser} from '../../services/api';
 import * as Yup from "yup";
 
 export default function Register() {
+
   const [formData, setFormData] = useState({
     username: '',
-    phone: '',
+    firstname: '',
+    lastname: '',
+    phonenumber: '',
     password: '',
     confirmPassword: ''
   });
@@ -17,22 +20,21 @@ export default function Register() {
   const [errors, setErrors] = useState({});
 
   const validationSchema = Yup.object({
+    username: Yup.string().required("กรุณาใส่ชื่อผู้ใช้"),
+    firstname: Yup.string().required("กรุณาใส่ชื่อจริง"),
+    lastname: Yup.string().required("กรุณาใส่นามสกุล"),
     phonenumber: Yup.string()
-      .matches(/^\d{10}$/, "Phone Number must be 10 digits")
+      .matches(/^\d{10}$/, "เบอร์โทรศัพท์ควรมี 10 หลัก")
       .required("กรุณาใส่เบอร์โทรศัพท์"),
     password: Yup.string()
       .required("กรุณาใส่รหัสผ่าน")
       .min(8, "รหัสผ่านควรมีอย่างน้อง 8 ตัวอักษร")
-      .matches(
-        /[!@#$%^&*(),.?":{}|<>]/,
-        "รหัสผ่านควรมีอักขระพิเศษอย่างน้อยหนึ่งตัว"
-      )
-      .matches(/[0-9]/, "รหัสผ่านควรมีตัวเลขอย่างน้องหนึ่งตัว")
-      .matches(/[A-Z]/, "รหัสผ่านควรมีตัวอักษรพิมพ์ใหญ่อย่างน้องหนึ่งตัว")
-      .matches(/[a-z]/, "รหัสผ่านควรมีตัวอักษรพิมพ์เล็กอย่างน้องหนึ่งตัว"),
+      .matches(/[0-9]/, "รหัสผ่านควรมีตัวเลขอย่างน้อย 1 ตัวอักษร")
+      .matches(/[A-Z]/, "รหัสผ่านควรมีตัวอักษรพิมพ์ใหญ่อย่างน้อย 1 ตัวอักษร")
+      .matches(/[a-z]/, "รหัสผ่านควรมีตัวอักษรพิมพ์เล็กอย่างน้อย 1 ตัวอักษร"),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password")], "รหัสผ่านไม่ตรงกัน")
-      .required("กรุณาใส่ยินยันรหัสผ่าน"),
+      .required("กรุณาใส่ยินยันรหัสผ่าน")
+      .oneOf([Yup.ref("password")], "รหัสผ่านไม่ตรงกัน"),
   });
 
   const handleChange = (e) => {
@@ -45,23 +47,38 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-        alert("Passwords do not match!");
-        return;
-    }
-
+    
     try {
-        const response = await registerUser({
+      await validationSchema.validate(formData, {abortEarly: false});
+      setErrors({});
+
+      const response = await registerUser({
             username: formData.username,
-            phoneNumber: formData.phone,
+            phonenumber: formData.phonenumber,
             password: formData.password
         });
-        alert('Registration successful');
-        console.log(response);
-    } catch (error) {
-        console.error("There was an error registering!", error);
-        alert('Registration failed');
-    }
+        if (response.status === 200){
+            alert('Registration successful');
+            console.log(response);
+            window.location.href = '/login'
+        } else {
+            alert(response.msg)
+        } 
+      } catch (error) {
+        if (error.inner) {
+
+            const newErrors = {};
+
+            error.inner.forEach((err) => {
+                newErrors[err.path] = err.message;
+            }); 
+
+            setErrors(newErrors);
+        }else{
+            console.error(error)
+            alert("Something went wrong, please try again 🥲")
+        }
+      }
 };
 
   return (
@@ -83,18 +100,46 @@ export default function Register() {
               value={formData.username}
               onChange={handleChange}
             />
-            <label className="label" htmlFor="phone">
+            {errors.username && <div className="error">{errors.username}</div>}
+            <label className="label" htmlFor="firstname">
+              ชื่อจริง
+            </label>
+            <input
+              className="input"
+              type="text"
+              id="firstname"
+              placeholder="ชื่อจริง"
+              aria-label="ชื่อจริง"
+              value={formData.firstname}
+              onChange={handleChange}
+            />
+            {errors.firstname && <div className="error">{errors.firstname}</div>}
+            <label className="label" htmlFor="lastname">
+              นามสกุล
+            </label>
+            <input
+              className="input"
+              type="text"
+              id="lastname"
+              placeholder="นามสกุล"
+              aria-label="นามสกุล"
+              value={formData.lastname}
+              onChange={handleChange}
+            />
+            {errors.lastname && <div className="error">{errors.lastname}</div>}
+            <label className="label" htmlFor="phonenumber">
               หมายเลขโทรศัพท์
             </label>
             <input
               className="input"
               type="tel"
-              id="phone"
+              id="phonenumber"
               placeholder="เลขโทรศัพท์"
               aria-label="หมายเลขโทรศัพท์"
-              value={formData.phone}
+              value={formData.phonenumber}
               onChange={handleChange}
             />
+            {errors.phonenumber && <div className="error">{errors.phonenumber}</div>}
             <label className="label" htmlFor="password">
               รหัสผ่าน
             </label>
@@ -107,6 +152,7 @@ export default function Register() {
               value={formData.password}
               onChange={handleChange}
             />
+            {errors.password && <div className="error">{errors.password}</div>}
             <label className="label" htmlFor="confirmPassword">
               ยืนยันรหัสผ่าน
             </label>
@@ -119,6 +165,7 @@ export default function Register() {
               value={formData.confirmPassword}
               onChange={handleChange}
             />
+            {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
             <button className="register-button" type="submit">
               ลงทะเบียน
             </button>
@@ -197,7 +244,7 @@ export default function Register() {
           background-color: #fff;
           margin-top: 6px;
           align-items: start;
-          color: rgba(0, 0, 0, 0.3);
+          color: #000;
           justify-content: center;
           padding: 11px 12px;
           font: 400 15px Mitr, sans-serif;

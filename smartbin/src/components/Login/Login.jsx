@@ -19,7 +19,7 @@ export default function Login() {
 
     const validationSchema = Yup.object({
         phonenumber: Yup.string()
-            .matches(/^\d{4}$/, "Phone Number must be 10 digits")
+            .matches(/^\d{10}$/, "เบอร์โทรศัพท์ควรมี 10 หลัก")
             .required("กรุณาใส่เบอร์โทรศัพท์"),
         password: Yup.string()
             .required("กรุณาใส่รหัสผ่าน")
@@ -36,8 +36,11 @@ export default function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        validationSchema.validate(formData, {abortEarly: false});
+        
         try {
+            await validationSchema.validate(formData, { abortEarly: false });
+            setErrors({});
+
             const response = await loginUser({
                 phonenumber: formData.phonenumber,
                 password: formData.password
@@ -55,7 +58,6 @@ export default function Login() {
             // Handle successful login, such as saving tokens, redirecting, etc.
         } catch (error) {
             if (error.inner) {
-
 
                 const newErrors = {};
 
