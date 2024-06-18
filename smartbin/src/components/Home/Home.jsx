@@ -19,7 +19,7 @@ export default function Home() {
     const [modalIsOpen, setModalIsOpen] = React.useState(false);
     const [userLocation, setUserLocation] = React.useState({lat: 18.80084905662726, lng: 98.950352098965380});
     const [locationLoaded, setLocationLoaded] = React.useState(false);
-    const [activities, setActivities] = React.useState({point: 0, smartbin:{name:""}, timestamp: ""});
+    const [activities, setActivities] = React.useState([]);
     const [summary, setSummary] = React.useState({total_point: 0, carbon_credit: 0, quantity: 0});
     const [isLoading, setIsLoading] = React.useState(true)
     const [user, setUser] = React.useState()
@@ -51,10 +51,9 @@ export default function Home() {
         try {
             const response = await getUserPointSummary(user.user_id);
             const responseA = await getUserActivitiesData(user.user_id);
+            console.log(responseA);
             setActivities(responseA); // Assuming response contains activitiesData
             setSummary(response);
-            console.log(response);
-            console.log(responseA);
         } catch (error) {
             console.error("Error fetching activity data:", error);
         }
@@ -85,7 +84,7 @@ export default function Home() {
         loadUserData()
     }, []);
 
-    useEffect( () => {
+    useEffect(() => {
         fetchMappingAPI()
     }, [navigator.geolocation])
     useEffect(() => {
@@ -313,7 +312,7 @@ export default function Home() {
                 width: 100%;
                 border-radius: 20px;
               }
-              
+
               .t {
                 font-weight: 600;
                 font-size: 20px;
@@ -358,18 +357,21 @@ export default function Home() {
                             </div>
                             {isLoading ? (
                                 <p className="t">กำลังโหลดประวัติการทำรายการ...</p>
-                              ) : activities.length > 0 ? (
+                            ) : activities.length > 0 ? (
                                 activities.map((activity, index) => (
-                                  <Transaction
-                                    key={index}
-                                    placeName={activity.smartbin.name}
-                                    date={activity.timestamp}
-                                    points={activity.point}
-                                  />
+                                    <Fragment>
+
+                                        <Transaction
+                                            key={index}
+                                            placeName={activity.smartbin.name}
+                                            date={activity.timestamp}
+                                            point={activity.point}
+                                        />
+                                    </Fragment>
                                 ))
-                              ) : (
+                            ) : (
                                 <p className="t">ยังไม่มีประวัติการทำรายการ</p>
-                              )}
+                            )}
                         </section>
                     </section>
                     <Modal
@@ -389,18 +391,18 @@ export default function Home() {
                         }}
                     >
                         <button onClick={closeModal} className="buttonClose"><img
-                          src= {Close}
-                          alt="Close"
-                          className="close"
+                            src={Close}
+                            alt="Close"
+                            className="close"
                         /></button>
                         <div className="full-map">
-                          {scriptLoaded && locationLoaded && (
-                              <GoogleMap
-                                  className="modal-map"
-                                  center={userLocation}
-                                  zoom={17}
-                              />
-                          )}
+                            {scriptLoaded && locationLoaded && (
+                                <GoogleMap
+                                    className="modal-map"
+                                    center={userLocation}
+                                    zoom={17}
+                                />
+                            )}
                         </div>
                     </Modal>
                 </Fragment>
