@@ -24,8 +24,10 @@ export default function Welcome() {
       </main>
       <style jsx>{`
         :root {
-          --primary-color: #fff;
+          --primary-color: #9E76B4;
+          --primary-color-container: #fff;
           --secondary-color: #000;
+          --secondary-color-font: #fff;
           --font-family: 'Mitr', sans-serif;
           --font-family-secondary: 'Roboto', sans-serif;
           --font-size-base: 18px;
@@ -36,7 +38,7 @@ export default function Welcome() {
         }
 
         .container {
-          background-color: var(--primary-color);
+          background-color: var(--primary-color-container);
           display: flex;
           max-width: 100%;
           width: 100%;
@@ -78,6 +80,7 @@ export default function Welcome() {
 
         .button {
           font-family: var(--font-family);
+          color: var(--secondary-color-font);
           border-radius: var(--border-radius);
           box-shadow: var(--box-shadow);
           background-color: var(--primary-color);
@@ -96,7 +99,8 @@ export default function Welcome() {
         }
 
         .button:hover, .button:focus {
-          background-color: rgba(255, 255, 255, 0.9);
+          background-color: var(--primary-color-container);
+          color: var(--secondary-color)
           transform: scale(1.05);
         }
 

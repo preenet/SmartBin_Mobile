@@ -8,6 +8,8 @@ import {getUserActivitiesData, getUser} from '../../services/api';
 import {getUsername} from '../../services/api';
 import useToken from "../../hooks/useToken";
 import {Fragment, useEffect} from "react";
+import Close from "../../images/left-arrow.png";
+
 
 Modal.setAppElement('#root');
 
@@ -231,15 +233,15 @@ export default function Home() {
               }
 
               .action-button {
+                border: none;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 font-weight: 600;
-                font-size: 16px;
+                font-size: 23px;
                 font-family: 'Mitr', sans-serif;
                 padding: 51px 33px;
                 border-radius: 20px;
-                border-color: #fff;
                 background-color: #fff;
                 box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25), 0px -1px 1px rgba(0, 0, 0, 0.25);
                 width: 175px;
@@ -265,6 +267,7 @@ export default function Home() {
               .modal-map {
                 height: 80vh;
                 width: 80vw;
+                border-radius: 20px;
               }
 
               .history-header {
@@ -286,6 +289,24 @@ export default function Home() {
                 cursor: pointer;
                 margin-top: 8px;
                 margin-bottom: 0px;
+              }
+
+              .close {
+                aspect-ratio: 1;
+                object-fit: auto;
+                object-position: center;
+                width: 24px;
+              }
+
+              .buttonClose {
+                background-color: #fff;
+                border: none;
+              }
+
+              .full-map {
+                height: 100%;
+                width: 100%;
+                border-radius: 20px;
               }
             `}
             </style>
@@ -354,17 +375,24 @@ export default function Home() {
                                 bottom: 'auto',
                                 marginRight: '-50%',
                                 transform: 'translate(-50%, -50%)',
+                                borderRadius: '20px',
                             },
                         }}
                     >
-                        <button onClick={closeModal}>Close</button>
-                        {scriptLoaded && locationLoaded && (
-                            <GoogleMap
-                                className="modal-map"
-                                center={userLocation}
-                                zoom={17}
-                            />
-                        )}
+                        <button onClick={closeModal} className="buttonClose"><img
+                          src= {Close}
+                          alt="Close"
+                          className="close"
+                        /></button>
+                        <div className="full-map">
+                          {scriptLoaded && locationLoaded && (
+                              <GoogleMap
+                                  className="modal-map"
+                                  center={userLocation}
+                                  zoom={17}
+                              />
+                          )}
+                        </div>
                     </Modal>
                 </Fragment>
             }
