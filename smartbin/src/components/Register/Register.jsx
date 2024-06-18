@@ -188,8 +188,23 @@ export default function Register() {
         </div>
       </section>
       <style jsx>{`
+        :root {
+          --primary-color: #9E76B4;
+          --primary-color-container: #fff;
+          --secondary-color: #000;
+          --secondary-color-font: #fff;
+          --font-family: 'Mitr', sans-serif;
+          --font-family-secondary: 'Roboto', sans-serif;
+          --font-size-base: 18px;
+          --font-size-large: 18px;
+          --font-size-small: 16px;
+          --border-radius: 20px;
+          --box-shadow: 0px 0.05px 2px 1px rgba(0, 0, 0, 0.25);
+          --box-shadow-button: 0px 1px 1px rgba(0, 0, 0, 0.25), 0px -1px 1px rgba(0, 0, 0, 0.25);
+        }
+
         .main-container {
-          background-color: #fff;
+          background-color: var(--primary-color-container);
           display: flex;
           width: auto;
           padding: 53px 17px;
@@ -199,26 +214,26 @@ export default function Register() {
           justify-content: center;
           align-items: center;
         }
+
         .header {
-          border-radius: 21px;
-          box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25),
-            0px -1px 4px 0px rgba(0, 0, 0, 0.25);
-          background-color: #fff;
+          border-radius: var(--border-radius);
+          box-shadow: var(--box-shadow-button);
+          background-color: var(--primary-color-container);
           align-self: center;
           margin-top: 19px;
           width: 115px;
           max-width: 100%;
-          color: #000;
+          color: var(--secondary-color);
           text-align: center;
           justify-content: center;
           padding: 12px 17px;
-          font: 700 16px Mitr, sans-serif;
+          font: 700 16px var(--font-family);
         }
+
         .registration-container {
-          border-radius: 20px;
-          box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25),
-            0px -1px 4px 0px rgba(0, 0, 0, 0.25);
-          background-color: #fff;
+          border-radius: var(--border-radius);
+          box-shadow: var(--box-shadow-button);
+          background-color: var(--primary-color-container);
           display: flex;
           margin-top: 20px;
           max-width: 480px;
@@ -226,58 +241,66 @@ export default function Register() {
           flex-direction: column;
           padding: 10px 17px;
         }
+
         .title {
-          color: #000;
-          font: 700 25px Mitr, sans-serif;
+          color: var(--secondary-color);
+          font: 700 25px var(--font-family);
           margin-bottom: 0px;
         }
+
         .form {
           display: flex;
           flex-direction: column;
         }
+
         .label {
-          color: #000;
+          color: var(--secondary-color);
           margin-top: 10px;
-          font: 600 15px Mitr, sans-serif;
+          font: 600 15px var(--font-family);
         }
+
         .input {
           border-radius: 10px;
-          box-shadow: 0px 0.05px 2px 0px rgba(0, 0, 0, 0.25) inset;
-          background-color: #fff;
+          box-shadow: var(--box-shadow) inset;
+          background-color: var(--primary-color-container);
+          border: none;
           margin-top: 6px;
           align-items: start;
-          color: #000;
+          color: var(--secondary-color);
           justify-content: center;
           padding: 11px 12px;
-          font: 400 15px Mitr, sans-serif;
+          font: 400 15px var(--font-family);
         }
+
         .register-button {
-          border-radius: 20px;
-          box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25), 0px -1px 1px rgba(0, 0, 0, 0.25);
-          background-color: #fff;
+          border-radius: var(--border-radius);
+          box-shadow: var(--box-shadow-button);
+          background-color: var(--primary-color);
           align-self: center;
           margin-top: 15px;
           width: 199px;
           max-width: 100%;
           align-items: center;
-          border-color: #fff;
-          color: #000;
+          border: none;
+          color: var(--secondary-color-font);
           text-align: center;
           justify-content: center;
           padding: 12px 60px;
-          font: 400 15px Mitr, sans-serif;
+          font: 400 15px var(--font-family);
         }
+
         .alternative {
           z-index: 10;
-          background-color: #fff;
+          background-color: var(--primary-color-container);
           align-self: center;
           margin-top: 15px;
-          color: #000;
+          color: var(--secondary-color);
           text-align: center;
           justify-content: center;
           padding: 0 21px;
-          font: 400 15px Mitr, sans-serif;
+          font: 400 15px var(--font-family);
         }
+
         .icons {
           align-self: center;
           display: flex;
@@ -287,30 +310,35 @@ export default function Register() {
           gap: 20px;
           justify-content: space-between;
         }
+
         .icon {
           aspect-ratio: 1;
           object-fit: cover;
           width: 50px;
         }
+
         .existing-account {
           align-self: center;
           display: flex;
           gap: 5px;
           font-size: 15px;
-          color: #000;
+          color: var(--secondary-color);
           font-weight: 400;
           margin: 20px 0 8px;
         }
+
         .account-text {
-          font-family: Mitr, sans-serif;
+          font-family: var(--font-family);
         }
+
         .login-link {
-          font-family: Mitr, sans-serif;
+          font-family: var(--font-family);
           text-decoration: underline;
-          background-color: #fff;
+          background-color: var(--primary-color-container);
         }
+
         .error {
-          font: 15px Mitr, sans-serif;
+          font: 15px var(--font-family);
           color: red;
         }
       `}</style>
