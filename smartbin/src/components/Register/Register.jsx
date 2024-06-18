@@ -54,6 +54,8 @@ export default function Register() {
 
       const response = await registerUser({
             username: formData.username,
+            firstname: formData.firstname,
+            lastname:formData.lastname,
             phonenumber: formData.phonenumber,
             password: formData.password
         });

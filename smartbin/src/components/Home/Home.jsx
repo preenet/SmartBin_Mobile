@@ -5,7 +5,6 @@ import UserCard from './UserCard';
 import Transaction from './Transaction';
 import GoogleMap from "../GoogleMap";
 import {getUserActivitiesData, getUser} from '../../services/api';
-import {getUsername} from '../../services/api';
 import useToken from "../../hooks/useToken";
 import {Fragment, useEffect} from "react";
 
@@ -17,7 +16,6 @@ export default function Home() {
     const [locationLoaded, setLocationLoaded] = React.useState(false);
     const [activities, setActivities] = React.useState({points: 0, carbon: 0, recycle: 0});
     const [transactions, setTransactions] = React.useState([]);
-    const [username, setUsername] = React.useState("");
     const [isLoading, setIsLoading] = React.useState(true)
     const [user, setUser] = React.useState()
     const {reload, getUser, getToken} = useToken()
