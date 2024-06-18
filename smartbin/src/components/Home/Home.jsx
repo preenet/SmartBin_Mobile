@@ -4,7 +4,7 @@ import useLoadScript from "../../hooks/useLoadScript";
 import UserCard from './UserCard';
 import Transaction from './Transaction';
 import GoogleMap from "../GoogleMap";
-import {getUserActivitiesData, getUser} from '../../services/api';
+import {getUserActivitiesData, getUser, getUserPointSummary} from '../../services/api';
 import useToken from "../../hooks/useToken";
 import {Fragment, useEffect} from "react";
 import Close from "../../images/left-arrow.png";
@@ -12,12 +12,15 @@ import Close from "../../images/left-arrow.png";
 
 Modal.setAppElement('#root');
 
+const smartBinImage = '../../images/BIN/GREEN.png';
+
+
 export default function Home() {
     const [modalIsOpen, setModalIsOpen] = React.useState(false);
     const [userLocation, setUserLocation] = React.useState({lat: 18.80084905662726, lng: 98.950352098965380});
     const [locationLoaded, setLocationLoaded] = React.useState(false);
-    const [activities, setActivities] = React.useState({points: 0, carbon: 0, recycle: 0});
-    const [transactions, setTransactions] = React.useState([]);
+    const [activities, setActivities] = React.useState({point: 0, smartbin:{name:""}, timestamp: ""});
+    const [summary, setSummary] = React.useState({total_point: 0, carbon_credit: 0, quantity: 0});
     const [isLoading, setIsLoading] = React.useState(true)
     const [user, setUser] = React.useState()
     const {reload, getUser, getToken} = useToken()
@@ -46,9 +49,12 @@ export default function Home() {
     const fetchData = async () => {
         setIsLoading(true)
         try {
-            const response = await getUserActivitiesData(user.user_id);
-            setActivities(response.activitiesData); // Assuming response contains activitiesData
-            setTransactions(response.transactions); // Assuming response contains transactions
+            const response = await getUserPointSummary(user.user_id);
+            const responseA = await getUserActivitiesData(user.user_id);
+            setActivities(responseA); // Assuming response contains activitiesData
+            setSummary(response);
+            console.log(response);
+            console.log(responseA);
         } catch (error) {
             console.error("Error fetching activity data:", error);
         }
@@ -85,6 +91,7 @@ export default function Home() {
     useEffect(() => {
         fetchData()
     }, [user])
+
 
     return (
         <>
@@ -306,6 +313,11 @@ export default function Home() {
                 width: 100%;
                 border-radius: 20px;
               }
+              
+              .t {
+                font-weight: 600;
+                font-size: 20px;
+              }
             `}
             </style>
             {isLoading ?
@@ -321,15 +333,10 @@ export default function Home() {
                                 <p className="view-all">ดูทั้งหมด</p>
                             </div>
                             <section className="points-section">
-                                <UserCard title="คุณมีแต้มทั้งหมด" units="คะแนน" value="120"/>
-                                <UserCard title="ลดคาร์บอนได้ทั้งหมด" units="ตัน" value="0.009"/>
-                                <UserCard title="รีไซเคิลไปทั้งหมด" units="กรัม" value="120"/>
+                                <UserCard title="คุณมีแต้มทั้งหมด" units="คะแนน" value={summary.total_point}/>
+                                <UserCard title="ลดคาร์บอนได้ทั้งหมด" units="ตัน" value={summary.carbon_credit}/>
+                                <UserCard title="รีไซเคิลไปทั้งหมด" units="ชิ้น" value={summary.quantity}/>
                             </section>
-                            {/*<section className="points-section">*/}
-                            {/*  <UserCard title="คุณมีแต้มทั้งหมด" units="คะแนน" value={activities.points} />*/}
-                            {/*  <UserCard title="ลดคาร์บอนได้ทั้งหมด" units="ตัน" value={activities.carbon} />*/}
-                            {/*  <UserCard title="รีไซเคิลไปทั้งหมด" units="กรัม" value={activities.recycle} />*/}
-                            {/*</section>*/}
                         </section>
                         <div className="search-nearby-button" onClick={openModal}>
                             {scriptLoaded && locationLoaded && (
@@ -349,16 +356,20 @@ export default function Home() {
                                 <p className="history-title">ประวัติการทำรายการ</p>
                                 <p className="view-all-transactions">ดูทั้งหมด</p>
                             </div>
-                            <Transaction placeName="ชื่อสถานที่" date="02/05/2024 - 13:00 น." points="60"/>
-                            <Transaction placeName="ชื่อสถานที่" date="01/05/2024 - 12:00 น." points="60"/>
-                            {/* {transactions.map(transaction => (
-            <Transaction
-              key={transaction.activityID}
-              location={transaction.location}
-              timestamp={transaction.timestamp}
-              point={transaction.point}
-            />
-          ))} */}
+                            {isLoading ? (
+                                <p className="t">กำลังโหลดประวัติการทำรายการ...</p>
+                              ) : activities.length > 0 ? (
+                                activities.map((activity, index) => (
+                                  <Transaction
+                                    key={index}
+                                    placeName={activity.smartbin.name}
+                                    date={activity.timestamp}
+                                    points={activity.point}
+                                  />
+                                ))
+                              ) : (
+                                <p className="t">ยังไม่มีประวัติการทำรายการ</p>
+                              )}
                         </section>
                     </section>
                     <Modal

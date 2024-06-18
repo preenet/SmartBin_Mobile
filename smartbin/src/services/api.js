@@ -24,13 +24,23 @@ export const loginUser = async (userData) => {
 // Function to fetch activity data
 export const getUserActivitiesData = async (userId) => {
     try {
-        const response = await apiClient.get(`/activities/${userId}`); // Adjust the URL to match your backend endpoint
+        const response = await apiClient.get(`/activities/${userId}`);
         return response.data;
     } catch (error) {
         console.error("Error fetching activity data:", error);
         throw error;
     }
 };
+
+export const getUserPointSummary = async (userId) => {
+    try {
+        const response = await apiClient.get(`/recycling-summary/${userId}`)
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching activity data:", error);
+        throw error;
+    }
+}
 
 // Example functions for fetching user and rewards
 export const getUser = async (userId) => {
