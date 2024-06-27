@@ -42,6 +42,16 @@ export const getUserPointSummary = async (userId) => {
     }
 }
 
+export const getSmartbin = async () => {
+    try {
+        const response = await apiClient.get(`/smartbins`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching smartbin:", error);
+        throw error;
+    }
+}; 
+
 // Example functions for fetching user and rewards
 export const getUser = async (userId) => {
     try {
