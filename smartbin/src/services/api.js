@@ -50,8 +50,8 @@ export const getSmartbin = async () => {
         console.error("Error fetching smartbin:", error);
         throw error;
     }
-};  
-                                                                                                                                                       
+}; 
+
 // Example functions for fetching user and rewards
 export const getUser = async (userId) => {
     try {

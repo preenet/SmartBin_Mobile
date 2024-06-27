@@ -1,17 +1,30 @@
-import React from 'react';
-import './css/Popup.css'; // Import the CSS for the popup
+import React, { useEffect } from 'react';
+import './Popup.css';
 
 const Popup = ({ smartbin, onClose }) => {
+  const handleClickOutside = (event) => {
+    if (event.target.className === 'popup-container') {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="popup-container">
+    <div className="popup-container" onClick={handleClickOutside}>
       <div className="popup-content">
-        <h3>{smartbin.name}</h3>
-        <p>ปริมาณขยะประเภทขวดพลาสติก: 0% [ว่าง]</p>
-        <p>ปริมาณขยะประเภทขวดแก้ว: 0% [ว่าง]</p>
-        <p>ปริมาณขยะประเภทกระป๋อง: 5% [ว่าง]</p>
-        <button>นำทาง</button>
-        <button>รายงานปัญหา</button>
-        <button className="close-button" onClick={onClose}>X</button>
+        <h3>รูปภาพ</h3> 
+        <h4>{smartbin.name}</h4> 
+        <p>ปริมาณขยะประเภทขวดพลาสติก: 0% [ว่าง]</p> 
+        <div className="popup-buttons">
+          <button className="popup-button">นำทาง</button>
+          <button className="popup-button">รายงานปัญหา</button>
+        </div>
       </div>
     </div>
   );
