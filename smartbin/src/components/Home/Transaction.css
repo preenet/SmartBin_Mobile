@@ -1,93 +1,92 @@
 .transaction {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin: 10px 0;
-    padding: 10px;
-    cursor: pointer;
-  }
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 10px 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.transaction-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transaction-header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.transaction-place-name {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.transaction-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.transaction-date,
+.transaction-points,
+.transaction-toggle {
+  margin: 0;
+}
+
+.transaction-date {
+  font-size: 14px;
+  color: #666;
+}
+
+.transaction-points {
+  font-size: 16px;
+  font-weight: bold;
+  color: green;
+  margin-left: auto;
+}
+
+.transaction-toggle {
+  font-size: 16px;
+  font-weight: bold;
+  color: #666;
+  margin-left: 10px;
+}
+
+.points-highlight {
+  color: green;
+}
+
+.transaction-extra-details {
+  margin-top: 10px;
+  text-align: left; /* Align text to the left */
+}
+
+.transaction-details-header {
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: left; /* Align text to the left */
+}
+
+.transaction-detail {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.transaction-detail span {
+  display: block; 
   
-  .transaction-details {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .transaction-header {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-  
-  .transaction-place-name {
-    font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
-  
-  .transaction-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-  
-  .transaction-date,
-  .transaction-points,
-  .transaction-toggle {
-    margin: 0;
-  }
-  
-  .transaction-date {
-    font-size: 14px;
-    color: #666;
-  }
-  
-  .transaction-points {
-    font-size: 16px;
-    font-weight: bold;
-    color: green;
-    margin-left: auto;
-  }
-  
-  .transaction-toggle {
-    font-size: 16px;
-    font-weight: bold;
-    color: #666;
-    margin-left: 10px;
-  }
-  
-  .points-highlight {
-    color: green;
-  }
-  
-  .transaction-extra-details {
-    margin-top: 10px;
-    text-align: left; /* Align text to the left */
-  }
-  
-  .transaction-details-header {
-    font-weight: bold;
-    margin-bottom: 5px;
-    text-align: left; /* Align text to the left */
-  }
-  
-  .transaction-detail {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-  }
-  
-  .transaction-detail span {
-    display: block; 
-    
-  }
-  
-  .transaction-material {
-    flex-grow: 1; 
-  }
-  
-  .transaction-detail-point {
-    color: green;
-    margin-left: 10px; 
-  }
-  
+}
+
+.transaction-material {
+  flex-grow: 1; 
+}
+
+.transaction-detail-point {
+  color: green;
+  margin-left: 10px; 
+}
