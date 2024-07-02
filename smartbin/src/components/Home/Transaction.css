@@ -63,6 +63,7 @@
 .transaction-extra-details {
   margin-top: 10px;
   text-align: left; /* Align text to the left */
+  width: 100%;
 }
 
 .transaction-details-header {
