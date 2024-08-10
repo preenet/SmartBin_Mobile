@@ -5,6 +5,7 @@ import Register from './components/Register/Register';
 import Login from './components/Login/Login';
 import ForgotPassword from './components/Forgot-password/ForgotPassword';
 import Home from './components/Home/Home';
+import Stat from './components/Stat/Stat';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/stat" element={<Stat />} />
         </Routes>
       </div>
     </Router>

@@ -83,4 +83,13 @@ export const getRewards = async () => {
     }
 };
 
+export const getUserStats = async (userId) => {
+    try {
+        const response = await apiClient.get(`/user-stats/${userId}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching user stats:", error);
+        throw error;
+    }
+};
 // Define other API requests similarly...

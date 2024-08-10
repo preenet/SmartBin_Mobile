@@ -8,6 +8,7 @@ import {getSmartbin, getUserActivitiesData, getUserPointSummary, getUser} from '
 import useToken from "../../hooks/useToken";
 import {Fragment, useEffect} from "react";
 import Close from "../../images/left-arrow.png";
+import { Link } from 'react-router-dom';
 
 Modal.setAppElement('#root');
 
@@ -334,7 +335,8 @@ export default function Home() {
                         <section className="container-2">
                             <div className="user-greeting-container">
                                 <p className="user-greeting">สวัสดีคุณ {user.username} </p>
-                                <p className="view-all">ดูทั้งหมด</p>
+                                {/* <p className="view-all">ดูทั้งหมด</p> */}
+                                <p className="view-all"><Link to="/stat">ดูทั้งหมด</Link></p>
                             </div>
                             <section className="points-section">
                                 <UserCard title="คุณมีแต้มทั้งหมด" units="คะแนน" value={summary.total_point}/>

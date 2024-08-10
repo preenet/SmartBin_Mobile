@@ -87,7 +87,7 @@ export default function Login() {
                             className="input"
                             type="tel"
                             id="phonenumber"
-                            placeholder="เลขโทรศัพท์"
+                            placeholder="หมายเลขโทรศัพท์"
                             aria-label="หมายเลขโทรศัพท์"
                             value={formData.phonenumber}
                             onChange={handleChange}
