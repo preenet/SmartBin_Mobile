@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { getUserStats } from '../../services/api'; // Assuming this endpoint provides the necessary data
+import { getUserStats } from '../../services/api'; 
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import './Stat.css'; // Assuming you have a CSS file for styling
+import './Stat.css'; 
 
 export default function Stat() {
   const [stats, setStats] = useState({

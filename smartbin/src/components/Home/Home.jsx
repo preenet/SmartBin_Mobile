@@ -356,7 +356,9 @@ export default function Home() {
                         </div>
                         <div className="action-buttons">
                             <button className="action-button">สแกนขยะ</button>
-                            <button className="action-button">แลกรางวัล</button>
+                            <button className="action-button" onClick={() => window.location.href = '/redeem-shop'}>
+                              แลกรางวัล
+                            </button>
                         </div>
                         <section className="transaction-section">
                             <div className="history-header">

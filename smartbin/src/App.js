@@ -6,6 +6,7 @@ import Login from './components/Login/Login';
 import ForgotPassword from './components/Forgot-password/ForgotPassword';
 import Home from './components/Home/Home';
 import Stat from './components/Stat/Stat';
+import RedeemShop from './components/RedeemShop/RedeemShop';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/home" element={<Home />} />
           <Route path="/stat" element={<Stat />} />
+          <Route path="/redeem-shop" element={<RedeemShop />} />
         </Routes>
       </div>
     </Router>

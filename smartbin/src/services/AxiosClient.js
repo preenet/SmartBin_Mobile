@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API_URL = 'https://smartbin-be.asterme.xyz/';
+// const API_URL = 'https://smartbin-be.asterme.xyz/';
+const API_URL = 'http://127.0.0.1:5000';
+
 
 const apiClient = axios.create({
     baseURL: API_URL,
