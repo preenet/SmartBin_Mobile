@@ -1,7 +1,24 @@
-version: '3.8'
+version: '3.5'
+
 services:
-    frontend:
-        image: ${DOCKER_HUB_USERNAME}/smart-bin-mobile-interface:latest
-        restart: always
-        ports:
-            - 8866:80
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+    volumes:
+       - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+    postgres:

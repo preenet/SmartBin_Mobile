@@ -6,7 +6,10 @@ import Login from './components/Login/Login';
 import ForgotPassword from './components/Forgot-password/ForgotPassword';
 import Home from './components/Home/Home';
 import Stat from './components/Stat/Stat';
+import Settings from './components/Stat/Settings';
 import RedeemShop from './components/RedeemShop/RedeemShop';
+import ProductDetail from './components/RedeemShop/ProductDetail';
+
 
 function App() {
   return (
@@ -20,6 +23,8 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/stat" element={<Stat />} />
           <Route path="/redeem-shop" element={<RedeemShop />} />
+          <Route path="/redeem-shop/:productId" element={<ProductDetail />} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
       </div>
     </Router>
