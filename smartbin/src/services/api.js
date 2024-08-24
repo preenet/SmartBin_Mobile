@@ -1,5 +1,7 @@
 // src/services/api.js
 import apiClient from "./AxiosClient";
+
+// Register a new user
 export const registerUser = async (userData) => {
     try {
         const response = await apiClient.post(`/register`, userData);
@@ -32,16 +34,18 @@ export const getUserActivitiesData = async (userId) => {
     }
 };
 
+// Function to fetch user point summary
 export const getUserPointSummary = async (userId) => {
     try {
-        const response = await apiClient.get(`/recycling-summary/${userId}`)
+        const response = await apiClient.get(`/recycling-summary/${userId}`);
         return response.data;
     } catch (error) {
         console.error("Error fetching activity data:", error);
         throw error;
     }
-}
+};
 
+// Function to fetch smartbin data
 export const getSmartbin = async () => {
     try {
         const response = await apiClient.get(`/smartbins`);
@@ -50,9 +54,9 @@ export const getSmartbin = async () => {
         console.error("Error fetching smartbin:", error);
         throw error;
     }
-}; 
+};
 
-// Example functions for fetching user and rewards
+// Function to fetch user profile data
 export const getUser = async (userId) => {
     try {
         const response = await apiClient.get(`/users/${userId}`);
@@ -63,6 +67,7 @@ export const getUser = async (userId) => {
     }
 };
 
+// Function to fetch username data
 export const getUsername = async (username) => {
     try {
         const response = await apiClient.get(`/users/${username}`);
@@ -73,6 +78,7 @@ export const getUsername = async (username) => {
     }
 };
 
+// Function to fetch rewards
 export const getRewards = async () => {
     try {
         const response = await apiClient.get(`/rewards`);
@@ -83,6 +89,7 @@ export const getRewards = async () => {
     }
 };
 
+// Function to fetch user statistics
 export const getUserStats = async (userId) => {
     try {
         const response = await apiClient.get(`/user-stats/${userId}`);
@@ -92,4 +99,16 @@ export const getUserStats = async (userId) => {
         throw error;
     }
 };
+
+// Function to update user profile data
+export const updateUserProfile = async (userData) => {
+    try {
+        const response = await apiClient.put(`/users/${userData.user_id}`, userData);
+        return response.data;
+    } catch (error) {
+        console.error("Error updating user profile:", error);
+        throw error;
+    }
+};
+
 // Define other API requests similarly...

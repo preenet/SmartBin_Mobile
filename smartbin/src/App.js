@@ -9,6 +9,7 @@ import Stat from './components/Stat/Stat';
 import Settings from './components/Stat/Settings';
 import RedeemShop from './components/RedeemShop/RedeemShop';
 import ProductDetail from './components/RedeemShop/ProductDetail';
+import EditProfile from './components/Stat/EditProfile';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/redeem-shop" element={<RedeemShop />} />
           <Route path="/redeem-shop/:productId" element={<ProductDetail />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/edit-profile" element={<EditProfile />} />
         </Routes>
       </div>
     </Router>
