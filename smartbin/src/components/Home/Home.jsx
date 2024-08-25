@@ -363,7 +363,9 @@ export default function Home() {
                         <section className="transaction-section">
                             <div className="history-header">
                                 <p className="history-title">ประวัติการทำรายการ</p>
-                                <p className="view-all-transactions">ดูทั้งหมด</p>
+                                <p className="view-all-transactions">
+                                  <Link to="/all-transactions">ดูทั้งหมด</Link>
+                                </p>
                             </div>
                             {isLoading ? (
                                 <p className="t">กำลังโหลดประวัติการทำรายการ...</p>

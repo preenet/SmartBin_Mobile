@@ -15,6 +15,7 @@ import NotificationSettings from './components/Stat/NotificationSettings';
 import UpdateSettings from './components/Stat/UpdateSettings';
 import HelpCenter from './components/Stat/HelpCenter';
 import TermsAndConditions from './components/Stat/TermsAndConditions';
+import AllTransactions from './components/Home/all-transactions';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/update-settings" element={<UpdateSettings />}></Route>
           <Route path="/help-center" element={<HelpCenter />}></Route>
           <Route path="/terms-and-conditions" element={<TermsAndConditions />}></Route>
+          <Route path="/all-transactions" element={<AllTransactions />}></Route>
         </Routes>
       </div>
     </Router>
