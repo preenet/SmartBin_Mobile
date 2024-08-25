@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getUser, updateUserProfile } from '../../services/api';
+import { Link } from 'react-router-dom';
 
 export default function EditProfile({ userId }) {
     const [formData, setFormData] = useState({
@@ -55,6 +56,9 @@ export default function EditProfile({ userId }) {
     return (
         <>
             <section className="main-container">
+                <Link to="/settings">
+                    <button className="back-button">←</button>
+                </Link>
                 <header className="header">แก้ไขโปรไฟล์</header>
 
                 <div className="form-section">
@@ -161,6 +165,20 @@ export default function EditProfile({ userId }) {
                     align-items: center;
                     border-radius: var(--border-radius);
                     box-shadow: var(--box-shadow);
+                }
+
+                .back-button {
+                    background-color: var(--primary-color);
+                    color: var(--secondary-color-font);
+                    border: none;
+                    border-radius: 50%;
+                    box-shadow: var(--box-shadow);
+                    width: 40px;
+                    height: 40px;
+                    cursor: pointer;
+                    position: absolute;
+                    top: 20px;
+                    left: 20px;
                 }
 
                 .header {
