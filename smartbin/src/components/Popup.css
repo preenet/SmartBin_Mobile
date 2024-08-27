@@ -1,62 +1,59 @@
 .popup-container {
-  font-family: 'Mitr';
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
 }
 
 .popup-content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 90%;
-  max-width: 400px;
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;  /* Ensure content stays within container */
+  max-width: 300px;  /* You can adjust this size as needed */
+  
 }
 
-.popup-content h3 {
+.popup-content .popup-image {
+  width: 100%;  /* Image width matches container */
+  max-width: 200px;  /* Max width of the image */
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
   margin-bottom: 10px;
-  font-size: 18px;
 }
 
 .popup-content h4 {
   margin-bottom: 10px;
-  font-size: 16px;
-  font-weight: bold;
 }
 
 .popup-content p {
   margin: 5px 0;
-  font-size: 14px;
 }
 
 .popup-buttons {
   display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 10px;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;  /* Buttons take full width */
 }
 
 .popup-button {
-  font-family: 'Mitr';
   padding: 10px 20px;
   border: none;
-  border-radius: 20px;
+  border-radius: 5px;
   background-color: #9E76B4;
   color: #fff;
   cursor: pointer;
-  flex: 1;
-  margin: 0 5px;
+  width: 100%;  /* Button width matches container */
 }
 
-.popup-button:nth-child(2) {
+.popup-button.close-button {
   background-color: #9E76B4;
+  margin-top: 5px;
 }

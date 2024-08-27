@@ -123,6 +123,7 @@ export default function Home() {
               .user-greeting-container {
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
                 margin-top: -10px;
                 margin-left: 5px;
               }
@@ -136,6 +137,12 @@ export default function Home() {
                 font-weight: 400;
                 font-size: 12px;
                 cursor: pointer;
+                text-decoration: none;
+                margin: 0;
+                align-self: center; 
+                padding: 0;
+                text-align: right;
+                color: inherit;
               }
 
               .points-section {
@@ -293,6 +300,8 @@ export default function Home() {
                 font-size: 12px;
                 font-weight: 400;
                 cursor: pointer;
+                text-decoration: none;
+                color: inherit;
                 margin-top: 8px;
                 margin-bottom: 0px;
               }
@@ -336,7 +345,7 @@ export default function Home() {
                             <div className="user-greeting-container">
                                 <p className="user-greeting">สวัสดีคุณ {user.username} </p>
                                 {/* <p className="view-all">ดูทั้งหมด</p> */}
-                                <p className="view-all"><Link to="/stat">ดูทั้งหมด</Link></p>
+                                <Link to="/stat" className="view-all">ดูทั้งหมด</Link>
                             </div>
                             <section className="points-section">
                                 <UserCard title="คุณมีแต้มทั้งหมด" units="คะแนน" value={summary.total_point}/>
@@ -363,9 +372,7 @@ export default function Home() {
                         <section className="transaction-section">
                             <div className="history-header">
                                 <p className="history-title">ประวัติการทำรายการ</p>
-                                <p className="view-all-transactions">
-                                  <Link to="/all-transactions">ดูทั้งหมด</Link>
-                                </p>
+                                <Link to="/all-transactions" className="view-all-transactions">ดูทั้งหมด</Link>
                             </div>
                             {isLoading ? (
                                 <p className="t">กำลังโหลดประวัติการทำรายการ...</p>

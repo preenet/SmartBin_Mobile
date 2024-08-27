@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './Popup.css';
+import blankImage from '../images/blank.png'; // Adjust the path if necessary
 
 const Popup = ({ smartbin, onClose }) => {
   const handleClickOutside = (event) => {
@@ -18,9 +19,9 @@ const Popup = ({ smartbin, onClose }) => {
   return (
     <div className="popup-container" onClick={handleClickOutside}>
       <div className="popup-content">
-        <h3>รูปภาพ</h3> 
+        <img src={blankImage} alt="Smart Bin" className="popup-image" /> {/* Added image */}
         <h4>{smartbin.name}</h4> 
-        <p>ปริมาณขยะประเภทขวดพลาสติก: 0% [ว่าง]</p> 
+        <p>ปริมาณขยะ: 0% [ว่าง]</p> 
         <div className="popup-buttons">
           <button className="popup-button">นำทาง</button>
           <button className="popup-button">รายงานปัญหา</button>
