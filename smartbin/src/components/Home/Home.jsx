@@ -202,6 +202,7 @@ export default function Home() {
                 padding: 10px;
                 text-align: left;
                 margin-bottom: 0px;
+                margin-top: 0px;
               }
 
               .transaction-place-name {
@@ -377,7 +378,7 @@ export default function Home() {
                             {isLoading ? (
                                 <p className="t">กำลังโหลดประวัติการทำรายการ...</p>
                             ) : activities.length > 0 ? (
-                                activities.map((activity, index) => (
+                                activities.slice().reverse().map((activity, index) => (
                                     <Fragment key={index}>
                                         <Transaction
                                             placeName={activity.smartbin.name}

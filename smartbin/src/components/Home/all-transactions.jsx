@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { getUserActivitiesData } from '../../services/api'; // Ensure you have this API function to fetch activities data
 import { Link } from 'react-router-dom';
+import Transaction from './Transaction'; // Assuming you have a Transaction component for displaying individual transactions
 
 export default function AllTransactions({ userId }) {
     const [activities, setActivities] = useState([]);
@@ -32,14 +33,15 @@ export default function AllTransactions({ userId }) {
                     <p className="loading">กำลังโหลด...</p>
                 ) : (
                     <div className="transaction-list">
-                        {activities.map((activity, index) => (
-                            <div key={index} className="transaction-item">
-                                <div className="transaction-details">
-                                    <p className="place-name">ชื่อสถานที่</p>
-                                    <p className="transaction-date">{new Date(activity.timestamp).toLocaleString()}</p>
-                                </div>
-                                <p className="transaction-points">+{activity.point} คะแนน</p>
-                            </div>
+                        {activities.slice().reverse().map((activity, index) => (
+                            <Fragment key={index}>
+                                <Transaction
+                                    placeName={activity.smartbin.name}
+                                    date={activity.timestamp}
+                                    point={activity.point}
+                                    details={[{ material: activity.material, point: activity.point }]} // Wrap details in an array
+                                />
+                            </Fragment>
                         ))}
                     </div>
                 )}
@@ -65,7 +67,7 @@ export default function AllTransactions({ userId }) {
                     display: flex;
                     flex-direction: column;
                     padding: 53px 17px;
-                    max-width: 400px;
+                    max-width: 390px;
                     margin: 0 auto;
                     border-radius: var(--border-radius);
                     box-shadow: var(--box-shadow);
@@ -105,39 +107,6 @@ export default function AllTransactions({ userId }) {
                     display: flex;
                     flex-direction: column;
                     gap: 10px;
-                }
-
-                .transaction-item {
-                    display: flex;
-                    justify-content: space-between;
-                    padding: 10px;
-                    background-color: var(--primary-color-container);
-                    border-radius: var(--border-radius);
-                    box-shadow: var(--box-shadow);
-                    width: 100%;
-                }
-
-                .transaction-details {
-                    display: flex;
-                    flex-direction: column;
-                    font-size: var(--font-size-base);
-                }
-
-                .place-name {
-                    font-weight: 600;
-                    font-size: var(--font-size-base);
-                }
-
-                .transaction-date {
-                    font-weight: 400;
-                    font-size: var(--font-size-small);
-                }
-
-                .transaction-points {
-                    font-weight: 600;
-                    font-size: var(--font-size-base);
-                    color: rgba(52, 168, 83, 1);
-                    align-self: center;
                 }
             `}</style>
         </>

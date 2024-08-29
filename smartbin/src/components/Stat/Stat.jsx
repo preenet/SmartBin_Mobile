@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import axios from 'axios';
 import useToken from "../../hooks/useToken";
+import { getUserPointSummary, getUserActivitiesData } from '../../services/api';
 
 export default function Stat() {
   const [summary, setSummary] = useState({ total_point: 0, carbon_credit: 0, quantity: 0 });
   const [activities, setActivities] = useState([]);
   const [highlightedDates, setHighlightedDates] = useState([]);
-  const [achievements, setAchievements] = useState([]);
-  const [allAchievements, setAllAchievements] = useState([]); // Store all possible achievements
+  const [materialSummary, setMaterialSummary] = useState({ plastic: 0, tin: 0, glass: 0 }); 
   const [isLoading, setIsLoading] = useState(true);
   const { getUser, getToken } = useToken();
   const [user, setUser] = useState(null);
@@ -29,32 +28,21 @@ export default function Stat() {
 
         setUser(userData);
 
-        // Fetch user recycling summary
-        const summaryResponse = await axios.get(`/recycling-summary/${userData.user_id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setSummary(summaryResponse.data);
+        const summaryResponse = await getUserPointSummary(userData.user_id);
+        setSummary(summaryResponse);
 
-        // Fetch user activities
-        const activitiesResponse = await axios.get(`/activities/${userData.user_id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setActivities(activitiesResponse.data);
+        const activitiesResponse = await getUserActivitiesData(userData.user_id);
+        setActivities(activitiesResponse);
 
-        // Fetch user achievements
-        const achievementsResponse = await axios.get(`/achievements/${userData.user_id}`, {
-          headers: { Authorization: `Bearer ${token}` },
+        const materialSummary = { plastic: 0, tin: 0, glass: 0 };
+        activitiesResponse.forEach(activity => {
+          if (activity.material === 'plastic') materialSummary.plastic += activity.quantity;
+          if (activity.material === 'tin') materialSummary.tin += activity.quantity;
+          if (activity.material === 'glass') materialSummary.glass += activity.quantity;
         });
-        setAchievements(achievementsResponse.data);
+        setMaterialSummary(materialSummary);
 
-        // Fetch all possible achievements (this would be a predefined list from your backend)
-        const allAchievementsResponse = await axios.get(`/achievements/all`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setAllAchievements(allAchievementsResponse.data);
-
-        // Extract dates from activities
-        const dates = activitiesResponse.data.map(activity => new Date(activity.timestamp));
+        const dates = activitiesResponse.map(activity => new Date(activity.timestamp));
         setHighlightedDates(dates);
 
         setIsLoading(false);
@@ -73,10 +61,6 @@ export default function Stat() {
         return 'highlight';
       }
     }
-  };
-
-  const isAchievementCompleted = (achievementId) => {
-    return achievements.some(achievement => achievement.id === achievementId);
   };
 
   if (isLoading) {
@@ -113,42 +97,17 @@ export default function Stat() {
           <p className="stat-value">{summary.quantity} ครั้ง</p>
           <div className="recycling-details">
             <div className="detail-card">
-              <p className="detail-value">6</p>
+              <p className="detail-value">{materialSummary.plastic}</p> {/* Display plastic quantity */}
               <p className="detail-label">ขวดพลาสติก</p>
             </div>
             <div className="detail-card">
-              <p className="detail-value">0</p>
+              <p className="detail-value">{materialSummary.tin}</p> {/* Display tin quantity */}
               <p className="detail-label">กระป๋องอลูมิเนียม</p>
             </div>
             <div className="detail-card">
-              <p className="detail-value">0</p>
+              <p className="detail-value">{materialSummary.glass}</p> {/* Display glass quantity */}
               <p className="detail-label">ขวดแก้ว</p>
             </div>
-          </div>
-        </div>
-        <div className="achievements-section">
-          <div className="achievements-header">
-            <h2 className="stat-title">ความสำเร็จ</h2>
-            <p className="view-all">ดูทั้งหมด</p>
-          </div>
-          <div className="achievements-list">
-            {allAchievements.length > 0 ? (
-              allAchievements.map((achievement, index) => (
-                <div
-                  key={index}
-                  className={`achievement-card ${isAchievementCompleted(achievement.id) ? '' : 'incomplete'}`}
-                >
-                  <img
-                    src={achievement.imageUrl}
-                    alt={achievement.name}
-                    className={`achievement-image ${isAchievementCompleted(achievement.id) ? '' : 'grayscale'}`}
-                  />
-                  <p className="achievement-name">{achievement.name}</p>
-                </div>
-              ))
-            ) : (
-              <p>ยังไม่มีความสำเร็จ</p>
-            )}
           </div>
         </div>
       </section>

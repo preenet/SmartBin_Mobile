@@ -1,8 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import TestImage from "../../images/TEST_SHOP_IMAGE.jpg";
+import { getUserPointSummary } from '../../services/api';
+import useToken from "../../hooks/useToken";
 
 export default function RedeemShop() {
+  const [points, setPoints] = useState(0);
+  const { getUser } = useToken();
+
+  useEffect(() => {
+    const fetchUserPoints = async () => {
+      try {
+        const user = getUser();
+        const data = await getUserPointSummary(user.user_id); 
+        setPoints(data.total_point);
+      } catch (error) {
+        console.error('Error fetching user points:', error);
+      }
+    };
+
+    fetchUserPoints();
+  }, []);
+
   const rewards = [
     {
       id: 1,
@@ -40,7 +59,7 @@ export default function RedeemShop() {
       </header>
       <div className="points-frame">
         <p className="points-text">คุณมีแต้มทั้งหมด</p>
-        <p className="points-value">120 คะแนน</p>
+        <p className="points-value">{points} คะแนน</p>
       </div>
       <section className="rewards-section">
         <div className="category">

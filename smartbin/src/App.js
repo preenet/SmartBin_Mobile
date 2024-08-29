@@ -16,6 +16,10 @@ import UpdateSettings from './components/Stat/UpdateSettings';
 import HelpCenter from './components/Stat/HelpCenter';
 import TermsAndConditions from './components/Stat/TermsAndConditions';
 import AllTransactions from './components/Home/all-transactions';
+import AllRewards from './components/RedeemShop/AllRewards';
+import AdminControlPanel from './components/Admin/AdminControlPanel';
+import UserManagement from './components/Admin/UserManagement';
+import UserDetail from './components/Admin/UserDetail';
 
 function App() {
   return (
@@ -38,6 +42,10 @@ function App() {
           <Route path="/help-center" element={<HelpCenter />}></Route>
           <Route path="/terms-and-conditions" element={<TermsAndConditions />}></Route>
           <Route path="/all-transactions" element={<AllTransactions />}></Route>
+          <Route path="/all-rewards" element={<AllRewards />}></Route>
+          <Route path="/admin-control-panel" element={<AdminControlPanel />}></Route>
+          <Route path="/user-management" element={<UserManagement />}></Route>
+          <Route path="/user-management/:userId" element={<UserDetail />}></Route>
         </Routes>
       </div>
     </Router>
