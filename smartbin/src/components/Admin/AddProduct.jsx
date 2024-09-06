@@ -13,7 +13,7 @@ export default function AddProduct() {
         <h1 className="text-xl font-bold text-gray-800">เพิ่มสินค้า</h1>
       </header>
 
-      <div className="bg-gray-100 rounded-lg p-4 shadow-sm mb-6">
+      <div className="bg-gray-100 rounded-lg p-4 mb-0">
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">ชื่อสินค้า</label>
           <input
