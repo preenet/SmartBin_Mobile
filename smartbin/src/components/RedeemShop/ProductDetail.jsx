@@ -22,116 +22,36 @@ export default function ProductDetail() {
   };
 
   return (
-    <section className="product-detail-container">
-      <header className="header">
+    <section className="flex flex-col bg-white p-5 rounded-lg shadow-md max-w-lg mx-auto">
+      <header className="flex justify-between items-center mb-4">
         <Link to="/redeem-shop">
-          <button className="back-button">←</button>
+          <button className="bg-purple-600 text-white rounded-full px-3 py-2 text-lg">←</button>
         </Link>
-        <h1 className="title">{product.name}</h1>
+        <h1 className="text-lg font-bold">{product.name}</h1>
       </header>
-      <img src={product.image} alt={product.name} className="product-image" />
-      <section className="product-info">
-        <h2 className="product-name">{product.name}</h2>
-        <p className="product-points">{product.points} คะแนน</p>
-        <p className="product-description">{product.description}</p>
-        <div className="action-buttons">
-          <button className="navigate-button" onClick={handleNavigateToStore}>นำทางไปร้านค้า</button>
-          <button className="redeem-button" onClick={handleRedeemReward}>แลกรางวัล</button>
+      
+      <img src={product.image} alt={product.name} className="w-full rounded-lg mb-4" />
+      
+      <section className="bg-gray-100 p-4 rounded-lg">
+        <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
+        <p className="text-purple-600 font-bold text-lg mb-4">{product.points} คะแนน</p>
+        <p className="text-gray-700 mb-6">{product.description}</p>
+        
+        <div className="flex justify-between gap-4">
+          <button 
+            className="bg-green-500 text-white w-1/2 py-2 rounded-lg"
+            onClick={handleNavigateToStore}
+          >
+            นำทางไปร้านค้า
+          </button>
+          <button 
+            className="bg-purple-600 text-white w-1/2 py-2 rounded-lg"
+            onClick={handleRedeemReward}
+          >
+            แลกรางวัล
+          </button>
         </div>
       </section>
-      <style jsx>{`
-        .product-detail-container {
-          background-color: var(--primary-color-container);
-          padding: 20px;
-          border-radius: var(--border-radius);
-          box-shadow: var(--box-shadow);
-          width: 100%;
-          max-width: 480px;
-          margin: 0 auto;
-        }
-
-        .header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .back-button {
-          background-color: var(--primary-color);
-          color: var(--secondary-color-font);
-          border: none;
-          padding: 10px;
-          border-radius: var(--border-radius);
-          cursor: pointer;
-        }
-
-        .title {
-          font-family: var(--font-family);
-          font-size: var(--font-size-large);
-          font-weight: 700;
-          color: var(--secondary-color);
-        }
-
-        .product-image {
-          width: 100%;
-          border-radius: var(--border-radius);
-          margin-bottom: 20px;
-        }
-
-        .product-info {
-          background-color: #f9f9f9;
-          padding: 20px;
-          border-radius: var(--border-radius);
-        }
-
-        .product-name {
-          font-family: var(--font-family);
-          font-size: var(--font-size-large);
-          font-weight: 700;
-          margin-bottom: 10px;
-        }
-
-        .product-points {
-          font-family: var(--font-family);
-          font-size: var(--font-size-small);
-          color: var(--primary-color);
-          font-weight: 700;
-          margin-bottom: 20px;
-        }
-
-        .product-description {
-          font-family: var(--font-family);
-          font-size: var(--font-size-base);
-          color: var(--secondary-color);
-          margin-bottom: 20px;
-        }
-
-        .action-buttons {
-          display: flex;
-          justify-content: space-between;
-          gap: 10px;
-        }
-
-        .navigate-button, .redeem-button {
-          flex: 1;
-          padding: 10px;
-          border-radius: var(--border-radius);
-          border: none;
-          cursor: pointer;
-          font-family: var(--font-family);
-          font-size: var(--font-size-small);
-        }
-
-        .navigate-button {
-          background-color: #4CAF50;
-          color: white;
-        }
-
-        .redeem-button {
-          background-color: var(--primary-color);
-          color: var(--secondary-color-font);
-        }
-      `}</style>
     </section>
   );
 }

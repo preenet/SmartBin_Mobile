@@ -14,7 +14,7 @@ export default function HelpCenter() {
         <>
             <section className="main-container">
                 <Link to="/settings">
-                    <button className="back-button">←</button>
+                    <button className="bg-purple-600 text-white rounded-full px-3 py-2 text-lg">←</button>
                 </Link>
                 <header className="header">ศูนย์ช่วยเหลือ</header>
 

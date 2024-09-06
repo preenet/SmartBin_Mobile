@@ -5,6 +5,7 @@ import AppleIcon from "../../images/Apple icon.png";
 import EmailIcon from "../../images/Email icon.png";
 import {registerUser} from '../../services/api';
 import * as Yup from "yup";
+import logo from '../../images/logo.png';
 
 export default function Register() {
 
@@ -86,7 +87,9 @@ export default function Register() {
   return (
     <>
       <section className="main-container">
-        <header className="header">SMART BIN ICON</header>
+        <header className="header">
+          <img src={logo} alt="Smart Bin Logo" className="logo" />
+        </header>
         <div className="registration-container">
           <h1 className="title">ลงทะเบียน Smart Bin</h1>
           <form className="form" onSubmit={handleSubmit}>
@@ -216,18 +219,8 @@ export default function Register() {
         }
 
         .header {
-          border-radius: var(--border-radius);
-          box-shadow: var(--box-shadow-button);
-          background-color: var(--primary-color-container);
-          align-self: center;
-          margin-top: 19px;
-          width: 115px;
-          max-width: 100%;
-          color: var(--secondary-color);
           text-align: center;
-          justify-content: center;
-          padding: 12px 17px;
-          font: 700 16px var(--font-family);
+          margin-bottom: 20px;
         }
 
         .registration-container {
@@ -340,6 +333,11 @@ export default function Register() {
         .error {
           font: 15px var(--font-family);
           color: red;
+        }
+
+        .logo {
+          max-width: 150px; /* Adjust this size as needed */
+          height: auto;
         }
       `}</style>
     </>

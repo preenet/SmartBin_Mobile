@@ -12,7 +12,7 @@ export default function RedeemShop() {
     const fetchUserPoints = async () => {
       try {
         const user = getUser();
-        const data = await getUserPointSummary(user.user_id); 
+        const data = await getUserPointSummary(user.user_id);
         setPoints(data.total_point);
       } catch (error) {
         console.error('Error fetching user points:', error);
@@ -50,235 +50,80 @@ export default function RedeemShop() {
   ];
 
   return (
-    <section className="main-container">
-      <header className="header">
+    <section className="flex flex-col gap-6 p-4">
+      <header className="flex gap-2 items-center">
         <Link to="/home">
-          <button className="back-button">←</button>
+          <button className="bg-purple-600 text-white rounded-full px-3 py-2 text-lg">←</button>
         </Link>
-        <h1 className="title">แลกรางวัล</h1>
+        <h1 className="font-bold text-xl">แลกรางวัล</h1>
       </header>
-      <div className="points-frame">
-        <p className="points-text">คุณมีแต้มทั้งหมด</p>
-        <p className="points-value">{points} คะแนน</p>
+
+      <div className="flex items-center justify-between border border-gray-300 rounded-lg p-4">
+        <p className="font-medium">คุณมีแต้มทั้งหมด</p>
+        <p className="text-lg font-semibold">{points} คะแนน</p>
       </div>
-      <section className="rewards-section">
-        <div className="category">
-          <h2 className="sub-title">แนะนำสำหรับคุณ</h2>
-          <Link to="/all-rewards" className="view-all">ดูทั้งหมด</Link>
-        </div>
-        <div className="rewards-list-scroll">
-          {rewards.map(reward => (
-            <div key={reward.id} className="reward-card">
-              <img src={reward.image} alt={reward.name} className="reward-image" />
-              <p className="reward-name">{reward.name}</p>
-              <p className="reward-points">{reward.points} คะแนน</p>
-              <Link to={`/redeem-shop/${reward.id}`}>
-                <button className="view-reward-button">ดูรางวัล</button>
-              </Link>
-            </div>
-          ))}
+
+      <section className="space-y-6">
+        {/* Recommended Section */}
+        <div>
+          <div className="flex justify-between items-center">
+            <h2 className="font-semibold text-lg">แนะนำสำหรับคุณ</h2>
+            <Link to="/all-rewards" className="text-sm text-blue-600">ดูทั้งหมด</Link>
+          </div>
+          <div className="flex gap-4 overflow-x-auto py-2">
+            {rewards.map(reward => (
+              <div key={reward.id} className="flex flex-col items-center border border-gray-300 rounded-lg p-4 min-w-[140px]">
+                <img src={reward.image} alt={reward.name} className="w-full rounded-lg mb-4" />
+                <p className="font-semibold text-sm">{reward.name}</p>
+                <p className="text-purple-600 text-base font-bold">{reward.points} คะแนน</p>
+                <Link to={`/redeem-shop/${reward.id}`}>
+                  <button className="mt-2 bg-purple-600 text-white py-1 px-4 rounded-lg">ดูรางวัล</button>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="category">
-          <h2 className="sub-title">การบริจาค</h2>
-          <Link to="/all-donations" className="view-all">ดูทั้งหมด</Link>
-        </div>
-        <div className="rewards-list-scroll">
-          {rewards.map(reward => (
-            <div key={reward.id} className="reward-card">
-              <img src={reward.image} alt={reward.name} className="reward-image" />
-              <p className="reward-name">{reward.name}</p>
-              <p className="reward-points">{reward.points} คะแนน</p>
-              <Link to={`/redeem-shop/${reward.id}`}>
-                <button className="view-reward-button">ดูรางวัล</button>
-              </Link>
-            </div>
-          ))}
+        {/* Donations Section */}
+        <div>
+          <div className="flex justify-between items-center">
+            <h2 className="font-semibold text-lg">การบริจาค</h2>
+            <Link to="/all-donations" className="text-sm text-blue-600">ดูทั้งหมด</Link>
+          </div>
+          <div className="flex gap-4 overflow-x-auto py-2">
+            {rewards.map(reward => (
+              <div key={reward.id} className="flex flex-col items-center border border-gray-300 rounded-lg p-4 min-w-[140px]">
+                <img src={reward.image} alt={reward.name} className="w-full rounded-lg mb-4" />
+                <p className="font-semibold text-sm">{reward.name}</p>
+                <p className="text-purple-600 text-base font-bold">{reward.points} คะแนน</p>
+                <Link to={`/redeem-shop/${reward.id}`}>
+                  <button className="mt-2 bg-purple-600 text-white py-1 px-4 rounded-lg">ดูรางวัล</button>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="category">
-          <h2 className="sub-title">เสื้อผ้า</h2>
-          <Link to="/all-clothes" className="view-all">ดูทั้งหมด</Link>
-        </div>
-        <div className="rewards-list-scroll">
-          {rewards.map(reward => (
-            <div key={reward.id} className="reward-card">
-              <img src={reward.image} alt={reward.name} className="reward-image" />
-              <p className="reward-name">{reward.name}</p>
-              <p className="reward-points">{reward.points} คะแนน</p>
-              <Link to={`/redeem-shop/${reward.id}`}>
-                <button className="view-reward-button">ดูรางวัล</button>
-              </Link>
-            </div>
-          ))}
+        {/* Clothes Section */}
+        <div>
+          <div className="flex justify-between items-center">
+            <h2 className="font-semibold text-lg">เสื้อผ้า</h2>
+            <Link to="/all-clothes" className="text-sm text-blue-600">ดูทั้งหมด</Link>
+          </div>
+          <div className="flex gap-4 overflow-x-auto py-2">
+            {rewards.map(reward => (
+              <div key={reward.id} className="flex flex-col items-center border border-gray-300 rounded-lg p-4 min-w-[140px]">
+                <img src={reward.image} alt={reward.name} className="w-full rounded-lg mb-4" />
+                <p className="font-semibold text-sm">{reward.name}</p>
+                <p className="text-purple-600 text-base font-bold">{reward.points} คะแนน</p>
+                <Link to={`/redeem-shop/${reward.id}`}>
+                  <button className="mt-2 bg-purple-600 text-white py-1 px-4 rounded-lg">ดูรางวัล</button>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
-
-      <style jsx>{`
-        :root {
-          --primary-color: #9E76B4;
-          --primary-color-container: #fff;
-          --secondary-color: #000;
-          --secondary-color-font: #fff;
-          --font-family: 'Mitr', sans-serif;
-          --font-family-secondary: 'Roboto', sans-serif;
-          --font-size-base: 18px;
-          --font-size-large: 18px;
-          --font-size-small: 16px;
-          --border-radius: 20px;
-          --box-shadow: 0px 0.05px 2px 1px rgba(0, 0, 0, 0.25);
-          --box-shadow-button: 0px 1px 1px rgba(0, 0, 0, 0.25), 0px -1px 1px rgba(0, 0, 0, 0.25);
-        }
-
-        .main-container {
-          background-color: var(--primary-color-container);
-          display: flex;
-          width: auto;
-          padding: 53px 17px;
-          flex-direction: column;
-          margin: 0 auto;
-          height: auto;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .header {
-          display: flex;
-          justify-content: start;
-          align-items: center;
-          width: 100%;
-          max-width: 480px;
-          margin-bottom: 20px;
-        }
-
-        .back-button {
-          background-color: var(--primary-color);
-          color: var(--secondary-color-font);
-          border: none;
-          padding: 10px;
-          border-radius: var(--border-radius);
-          cursor: pointer;
-        }
-
-        .title {
-          font-family: var(--font-family);
-          font-size: var(--font-size-large);
-          font-weight: 700;
-          color: var(--secondary-color);
-          margin: 0;
-          padding-left: 10px;
-        }
-
-        .points-frame {
-          border: 1px solid #ddd;
-          border-radius: var(--border-radius);
-          padding: 10px;
-          width: 100%;
-          max-width: 480px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 20px;
-        }
-
-        .points-text {
-          font-family: var(--font-family);
-          font-size: var(--font-size-small);
-          color: var(--secondary-color);
-          font-weight: 600;
-          padding-left: 10px;
-        }
-
-        .points-value {
-          font-family: var(--font-family);
-          font-size: var(--font-size-large);
-          color: var(--secondary-color);
-          font-weight: 700;
-          padding-right: 10px;
-        }
-
-        .rewards-section {
-          width: 100%;
-          max-width: 480px;
-        }
-
-        .category {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-top: 20px;
-          margin-bottom: 10px;
-        }
-
-        .sub-title {
-          font-family: var(--font-family);
-          font-size: var(--font-size-base);
-          font-weight: 600;
-          color: var(--secondary-color);
-          margin: 0;
-        }
-
-        .view-all {
-          font-family: var(--font-family);
-          font-size: var(--font-size-small);
-          font-weight: 400;
-          color: var(--primary-color);
-          text-decoration: none;
-        }
-
-        .rewards-list-scroll {
-          display: flex;
-          gap: 10px;
-          overflow-x: auto;
-          scroll-snap-type: x mandatory;
-          padding-bottom: 10px;
-        }
-
-        .reward-card {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          border-radius: var(--border-radius);
-          background-color: var(--primary-color-container);
-          box-shadow: var(--box-shadow);
-          padding: 15px;
-          text-align: center;
-          min-width: 140px;
-          scroll-snap-align: start;
-        }
-
-        .reward-image {
-          width: 100%;
-          border-radius: var(--border-radius);
-          margin-bottom: 10px;
-        }
-
-        .reward-name {
-          font-family: var(--font-family);
-          font-size: var(--font-size-small);
-          font-weight: 600;
-          color: var(--secondary-color);
-          margin-bottom: 5px;
-        }
-
-        .reward-points {
-          font-family: var(--font-family);
-          font-size: var(--font-size-base);
-          color: var(--primary-color);
-          font-weight: 700;
-          margin-bottom: 10px;
-        }
-
-        .view-reward-button {
-          background-color: var(--primary-color);
-          color: var(--secondary-color-font);
-          border: none;
-          padding: 10px 20px;
-          border-radius: var(--border-radius);
-          cursor: pointer;
-          font-family: var(--font-family);
-        }
-      `}</style>
     </section>
   );
 }

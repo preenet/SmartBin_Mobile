@@ -3,118 +3,69 @@ import { Link, useParams } from 'react-router-dom';
 
 export default function UserDetail() {
   const { userId } = useParams();
-  const user = {
-    id: '00001',
-    username: 'username1',
-    phone: '0900000000',
-    createdDate: '15-05-2567',
-  }; // Replace with actual user data fetching logic
+
+  const users = [
+    { id: '1', username: 'username1', phone: '0900000000', createdDate: '15-05-2567' },
+    { id: '2', username: 'username2', phone: '0900000000', createdDate: '15-05-2567' },
+    { id: '3', username: 'username3', phone: '0900000000', createdDate: '15-05-2567' },
+  ];
+
+  const user = users.find((user) => user.id === userId);
+
+  if (!user) {
+    return <p className="text-center text-red-500">User not found</p>;
+  }
 
   return (
-    <section className="user-detail-container">
-      <header className="header">
+    <section className="max-w-lg mx-auto p-6 bg-white rounded-lg ">
+      <header className="flex items-center gap-3 mb-4">
         <Link to="/user-management">
-          <button className="back-button">←</button>
+          <button className="bg-purple-600 text-white rounded-full px-3 py-2 text-lg">
+            ←
+          </button>
         </Link>
-        <h1 className="title">การจัดการผู้ใช้</h1>
+        <h1 className="text-xl font-bold text-gray-800">การจัดการผู้ใช้</h1>
       </header>
       
-      <div className="user-detail-form">
-        <div className="form-group">
-          <label>ไอดี</label>
-          <input type="text" value={user.id} readOnly />
+      <div className="bg-gray-100 rounded-lg p-4 shadow-sm">
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">ไอดี</label>
+          <input
+            type="text"
+            value={user.id}
+            readOnly
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-lg bg-gray-50"
+          />
         </div>
-        <div className="form-group">
-          <label>ชื่อผู้ใช้</label>
-          <input type="text" value={user.username} />
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">ชื่อผู้ใช้</label>
+          <input
+            type="text"
+            value={user.username}
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-lg"
+          />
         </div>
-        <div className="form-group">
-          <label>เบอร์โทรศัพท์</label>
-          <input type="text" value={user.phone} />
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">เบอร์โทรศัพท์</label>
+          <input
+            type="text"
+            value={user.phone}
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-lg"
+          />
         </div>
-        <div className="form-group">
-          <label>วันที่สร้าง</label>
-          <input type="text" value={user.createdDate} readOnly />
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">วันที่สร้าง</label>
+          <input
+            type="text"
+            value={user.createdDate}
+            readOnly
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-lg bg-gray-50"
+          />
         </div>
-        <button className="save-button">แก้ไข</button>
+        <button className="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-500 transition">
+          แก้ไข
+        </button>
       </div>
-
-    <style jsx>{`
-        .user-detail-container {
-            display: flex;
-            flex-direction: column;
-            max-width: 390px;
-            margin: 0 auto;
-            padding: 53px 17px;
-            background-color: #fffff;
-            backdrop-filter: blur(0px);
-            border-radius: 21px;
-            gap: 10px;
-        }
-
-        .header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .back-button {
-            background-color: var(--primary-color);
-            color: var(--secondary-color-font);
-            border: none;
-            padding: 10px;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-        }
-
-        .title {
-            font-family: var(--font-family);
-            font-size: var(--font-size-large);
-            font-weight: 700;
-            color: var(--secondary-color);
-            margin: 0;
-        }
-
-        .user-detail-form {
-            background-color: var(--primary-color-container);
-            border-radius: var(--border-radius);
-            padding: 15px;
-            box-shadow: var(--box-shadow);
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            font-family: var(--font-family);
-            font-size: var(--font-size-small);
-            color: var(--secondary-color);
-            font-weight: 600;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border-radius: var(--border-radius);
-            border: 1px solid #ddd;
-            font-size: var(--font-size-small);
-            margin-top: 5px;
-        }
-
-        .save-button {
-            background-color: var(--primary-color);
-            color: var(--secondary-color-font);
-            border: none;
-            padding: 10px;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            font-family: var(--font-family);
-            width: 100%;
-            text-align: center;
-        }
-    `}</style>
-
     </section>
   );
 }

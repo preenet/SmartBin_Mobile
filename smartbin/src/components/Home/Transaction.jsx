@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import './Transaction.css';  // Import a CSS file for styling
 
 const materialTranslations = {
   plastic: 'ขวดพลาสติก',
@@ -16,31 +15,31 @@ function Transaction({ placeName, date, point, details }) {
   };
 
   return (
-    <div className="transaction">
-      <div className="transaction-details" onClick={handleToggle}>
-        <div className="transaction-header">
-          <p className="transaction-place-name">{placeName}</p>
-          <div className="transaction-info">
-            <p className="transaction-date">{new Date(date).toLocaleString()}</p>
-            <p className="transaction-points">
-              <span className="points-highlight">+{point}</span> คะแนน
+    <div className="border rounded-md p-4 flex flex-col gap-4">
+      <div className="flex justify-between gap-8 w-full items-center" onClick={handleToggle}>
+        <div className="flex flex-col gap-2 w-full">
+          <p className="text-lg font-bold">{placeName}</p>
+          <div className="flex justify-between w-full items-center">
+            <p className="text-xs text-neutral-500">{new Date(date).toLocaleString()}</p>
+            <p className="text-xl text-green-700">
+              <span className=" text-green-500 font-semibold">+{point}</span> คะแนน
             </p>
           </div>
         </div>
-        <p className="transaction-toggle">{isExpanded ? '▲' : '▼'}</p>
+        <p className="text-neutral-500">{isExpanded ? '▲' : '▼'}</p>
       </div>
       {isExpanded && (
-        <div className="transaction-extra-details">
-          <p className="transaction-details-header">รายการ</p>
+        <div className="flex flex-col gap-2 border rounded-md p-4">
+          <p className="font-semibold text-lg">รายการ</p>
           {details.length > 0 ? (
             details.map((detail, index) => (
-              <div key={index} className="transaction-detail">
-                <span className="transaction-material">{materialTranslations[detail.material] || detail.material}</span>
-                <span className="transaction-detail-point">+{detail.point} คะแนน</span>
+              <div key={index} className="flex justify-between items-center">
+                <span>{materialTranslations[detail.material] || detail.material}</span>
+                <span className="text-green-700">+{detail.point} คะแนน</span>
               </div>
             ))
           ) : (
-            <div className="transaction-detail">ไม่มีข้อมูล</div>
+            <div>ไม่มีข้อมูล</div>
           )}
         </div>
       )}

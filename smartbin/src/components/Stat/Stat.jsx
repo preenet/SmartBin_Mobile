@@ -4,6 +4,8 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import useToken from "../../hooks/useToken";
 import { getUserPointSummary, getUserActivitiesData } from '../../services/api';
+import axios from 'axios';
+import achievement1 from '../../images/A/ACHIEVEMENT1.png';
 
 export default function Stat() {
   const [summary, setSummary] = useState({ total_point: 0, carbon_credit: 0, quantity: 0 });
@@ -11,8 +13,31 @@ export default function Stat() {
   const [highlightedDates, setHighlightedDates] = useState([]);
   const [materialSummary, setMaterialSummary] = useState({ plastic: 0, tin: 0, glass: 0 }); 
   const [isLoading, setIsLoading] = useState(true);
+  const [achievements, setAchievements] = useState([
+    {
+      img: "https://cdn3.emoji.gg/emojis/79807-love.png",
+      name: "test 1"
+    },
+    {
+      img: "https://cdn3.emoji.gg/emojis/79807-love.png",
+      name: "test 1"
+    },
+    {
+      img: "https://cdn3.emoji.gg/emojis/79807-love.png",
+      name: "test 1"
+    },
+    {
+      img: "https://cdn3.emoji.gg/emojis/79807-love.png",
+      name: "test 1"
+    },
+    {
+      img: "https://cdn3.emoji.gg/emojis/79807-love.png",
+      name: "test 1"
+    },
+  ]);
   const { getUser, getToken } = useToken();
   const [user, setUser] = useState(null);
+
 
   useEffect(() => {
     const loadData = async () => {
@@ -45,7 +70,12 @@ export default function Stat() {
         const dates = activitiesResponse.map(activity => new Date(activity.timestamp));
         setHighlightedDates(dates);
 
-        setIsLoading(false);
+
+        // Check for achievements
+        if (activitiesResponse.data.length > 0) {
+          setAchievements([achievement1]); // Set the first achievement image
+        }
+
       } catch (error) {
         console.error("Error loading data:", error);
         setIsLoading(false);
@@ -63,51 +93,71 @@ export default function Stat() {
     }
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <section className="stat-container">
-      <header className="header">
+    <section className="flex flex-col gap-4 p-4">
+      <header className="flex justify-between gap-2 items-center">
         <Link to="/home">
-          <button className="back-button">←</button>
+          <button className="bg-purple-600 text-white rounded-full px-3 py-2 text-lg">←</button>
         </Link>
-        <h1 className="title">ภาพรวมของคุณ {user?.username}</h1>
-        <button className="settings-button" onClick={() => window.location.href = '/settings'}>⚙️</button>
+        <h1 className="font-bold text-xl">ภาพรวมของคุณ {user?.username}</h1>
+        <button className="text-xl" onClick={() => window.location.href = '/settings'}>⚙️</button>
       </header>
-      <section className="points-section">
-        <div className="points-card">
-          <p className="points-title">คุณมีแต้มทั้งหมด</p>
-          <p className="points-value">{summary.total_point} คะแนน</p>
+      <section className="flex flex-col gap-4">
+        <div className="border rounded-md flex flex-col items-center p-4 gap-4">
+          <p className="font-semibold text-lg">คุณมีแต้มทั้งหมด</p>
+          <p className="font-semibold text-lg text-primary">{summary.total_point} คะแนน</p>
         </div>
-        <div className="calendar-section">
-          <h2 className="sub-title">จำนวนวันที่คุณรีไซเคิลกับ Smart Bin</h2>
+        <div className="flex flex-col gap-4 border p-4 rounded-md items-center">
+          <h2 className="text-lg font-semibold">จำนวนวันที่คุณรีไซเคิลกับ Smart Bin</h2>
           <Calendar
             tileClassName={tileClassName}
           />
-          <p className="calendar-info">สุดยอด! คุณได้รีไซเคิลกับ Smart Bin {highlightedDates.length} วันในเดือนนี้ 🔥</p>
+          <p className="font-light"><span className="font-medium">สุดยอด!</span> คุณได้รีไซเคิลกับ Smart Bin {highlightedDates.length} วันในเดือนนี้ 🔥</p>
         </div>
-        <div className="carbon-credit">
-          <p className="stat-title">ลดคาร์บอนได้ทั้งหมด</p>
-          <p className="stat-value">{summary.carbon_credit.toFixed(3)} ตัน</p>
+        <div className="flex flex-col gap-4 border p-4 rounded-md items-center">
+          <p className="font-semibold text-lg">ลดคาร์บอนได้ทั้งหมด</p>
+          <p className="font-semibold text-lg text-primary">{summary.carbon_credit.toFixed(3)} ตัน</p>
         </div>
-        <div className="recycling-stats">
-          <p className="stat-title">รีไซเคิลไปทั้งหมด</p>
-          <p className="stat-value">{summary.quantity} ครั้ง</p>
-          <div className="recycling-details">
-            <div className="detail-card">
-              <p className="detail-value">{materialSummary.plastic}</p> {/* Display plastic quantity */}
-              <p className="detail-label">ขวดพลาสติก</p>
+        <div className="flex flex-col gap-4 border p-4 rounded-md items-center">
+          <p className="font-semibold text-lg">รีไซเคิลไปทั้งหมด</p>
+          <p className="font-semibold text-lg text-primary">{summary.quantity} ครั้ง</p>
+          <div className="grid grid-cols-3 gap-2 text-center">
+            <div className="flex flex-col gap-4 border p-4 rounded-md items-center justify-between">
+              <p className="font-semibold text-xl text-primary">{materialSummary.plastic}</p> {/* Display plastic quantity */}
+              <p className="font-semibold whitespace-break-spaces">ขวดพลาสติก</p>
             </div>
-            <div className="detail-card">
-              <p className="detail-value">{materialSummary.tin}</p> {/* Display tin quantity */}
-              <p className="detail-label">กระป๋องอลูมิเนียม</p>
+            <div className="flex flex-col gap-4 border p-4 rounded-md items-center justify-between">
+              <p className="font-semibold text-xl text-primary">{materialSummary.tin}</p> {/* Display tin quantity */}
+              <p className="font-semibold whitespace-break-spaces">กระป๋องอลูมิเนียม</p>
             </div>
-            <div className="detail-card">
-              <p className="detail-value">{materialSummary.glass}</p> {/* Display glass quantity */}
-              <p className="detail-label">ขวดแก้ว</p>
+            <div className="flex flex-col gap-4 border p-4 rounded-md items-center justify-between">
+              <p className="font-semibold text-xl text-primary">{materialSummary.glass}</p> {/* Display glass quantity */}
+              <p className="font-semibold whitespace-break-spaces">ขวดแก้ว</p>
             </div>
+          </div>
+        </div>
+        <div className="flex flex-col gap-4 border p-4 rounded-md items-center">
+          <div className="flex justify-between gap-4 items-center w-full">
+            <h2 className="text-lg font-semibold">ความสำเร็จ</h2>
+            <Link to="/all-achievements" className="text-sm text-neutral-500">ดูทั้งหมด</Link>
+          </div>
+          <div className="grid grid-cols-3 gap-2">
+            {achievements.length > 0 ? (
+              achievements.map((achievement, index) => (
+                <div key={index} className="border rounded-md p-2 flex flex-col gap-2">
+                  <img
+                    src={achievement.img}
+                    alt="Achievement"
+                    className=" aspect-square object-cover"
+                  />
+                  <p>
+                    {achievement.name}
+                  </p>
+                </div>
+              ))
+            ) : (
+              <p className='text-neutral-500 col-span-3'>ยังไม่มีความสำเร็จ</p>
+            )}
           </div>
         </div>
       </section>
@@ -202,7 +252,6 @@ export default function Stat() {
           border-radius: var(--border-radius);
           padding: 15px;
           box-shadow: var(--box-shadow);
-          margin-bottom: 20px;
         }
 
         .calendar-info {
@@ -242,7 +291,7 @@ export default function Stat() {
         }
 
         .achievements-section {
-          margin-top: 20px;
+          
         }
 
         .achievements-header {

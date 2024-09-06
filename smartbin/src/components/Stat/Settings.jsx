@@ -10,47 +10,50 @@ export default function Settings() {
   const handleLogout = () => {
     // Remove the token from storage
     updateToken(null);
-    
+
     // Redirect to the login page
     navigate('/login');
   };
 
   return (
-    <section className="settings-container">
-      <header className="header">
+    <section className="p-4 flex flex-col gap-4">
+      <header className="flex gap-2 items-center">
         <Link to="/stat">
-          <button className="back-button">←</button>
+          <button className="bg-purple-600 text-white rounded-full px-3 py-2 text-lg">←</button>
         </Link>
-        <h1 className="title">ตั้งค่า</h1>
+        <h1 className="font-bold text-xl">ตั้งค่า</h1>
       </header>
 
-      <div className="user-info">
-        <span className="username">{user?.username}</span>
-        <Link to="/edit-profile" className="edit-profile-link">แก้ไขข้อมูลส่วนตัว</Link>
-      </div>
+      <div className="flex flex-col gap-4 border p-4 rounded-md">
+        <div className='flex flex-row justify-between items-center'>
+        <span className="font-bold text-xl">{user?.username}</span>
+        <Link to="/edit-profile" className="text-primary">แก้ไขข้อมูลส่วนตัว</Link>
+        </div>
 
-      <div className="settings-options">
-        <Link to="/privacy-settings" className="settings-option">
-          ตั้งค่าความเป็นส่วนตัว
-        </Link>
-        <Link to="/notification-settings" className="settings-option">
-          การแจ้งเตือน
-        </Link>
-        <Link to="/update-settings" className="settings-option">
-          การอัพเดต
-        </Link>
-      </div>
 
-      <div className="support-options">
-        <Link to="/help-center" className="settings-option">
-          ศูนย์ความช่วยเหลือ
-        </Link>
-        <Link to="/terms-and-conditions" className="settings-option">
-          ข้อกำหนดและเงื่อนไข
-        </Link>
-        <button className="settings-option" onClick={handleLogout}>
-          ออกจากระบบ
-        </button>
+        <div className="flex flex-col gap-2">
+          <Link to="/privacy-settings" className="border p-4 rounded-md text-left">
+            ตั้งค่าความเป็นส่วนตัว
+          </Link>
+          <Link to="/notification-settings" className="border p-4 rounded-md text-left">
+            การแจ้งเตือน
+          </Link>
+          <Link to="/update-settings" className="border p-4 rounded-md text-left">
+            การอัพเดต
+          </Link>
+        </div>
+        <hr></hr>
+        <div className="flex flex-col gap-2">
+          <Link to="/help-center" className="border p-4 rounded-md text-left">
+            ศูนย์ความช่วยเหลือ
+          </Link>
+          <Link to="/terms-and-conditions" className="border p-4 rounded-md text-left">
+            ข้อกำหนดและเงื่อนไข
+          </Link>
+          <button className="p-4 rounded-md text-left border text-red-500" onClick={handleLogout}>
+            ออกจากระบบ
+          </button>
+        </div>
       </div>
 
       <style jsx>{`

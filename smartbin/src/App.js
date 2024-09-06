@@ -20,6 +20,11 @@ import AllRewards from './components/RedeemShop/AllRewards';
 import AdminControlPanel from './components/Admin/AdminControlPanel';
 import UserManagement from './components/Admin/UserManagement';
 import UserDetail from './components/Admin/UserDetail';
+import AllAchievements from './components/Stat/AllAchievements';
+import AchievementDetail from './components/Stat/AchievementDetail';
+import ShopManagement from './components/Admin/ShopManagement';
+import ShopDetail from './components/Admin/ShopDetail';
+import AddProduct from './components/Admin/AddProduct';
 
 function App() {
   return (
@@ -46,6 +51,11 @@ function App() {
           <Route path="/admin-control-panel" element={<AdminControlPanel />}></Route>
           <Route path="/user-management" element={<UserManagement />}></Route>
           <Route path="/user-management/:userId" element={<UserDetail />}></Route>
+          <Route path="/all-achievements" element={<AllAchievements />}></Route>
+          <Route path="/achievement/:id" element={<AchievementDetail />}></Route>
+          <Route path="/shop-management" element={<ShopManagement />}></Route>
+          <Route path="/shop-management/:shopId" element={<ShopDetail />} />
+          <Route path="/shop-management/:shopId/add-product" element={<AddProduct />} />
         </Routes>
       </div>
     </Router>

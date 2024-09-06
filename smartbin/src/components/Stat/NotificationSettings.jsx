@@ -19,7 +19,7 @@ export default function NotificationSettings() {
         <>
             <section className="main-container">
                 <Link to="/settings">
-                    <button className="back-button">←</button>
+                    <button className="bg-purple-600 text-white rounded-full px-3 py-2 text-lg">←</button>
                 </Link>
                 <header className="header">การตั้งค่าการแจ้งเตือน</header>
                 <div className="settings-container">
